@@ -3,44 +3,76 @@
 
 @layer base {
   :root {
-    --bone: #F3F1EC;
-    --ink: #0A0A0B;
-    --graphite: #1A1A1D;
-    --stone: #8B8984;
-    --line: rgba(10, 10, 11, 0.12);
-    --line-subtle: rgba(10, 10, 11, 0.06);
-    --signal: #3882F6; /* Official ZenithDistrict Electric Blue */
-    --signal-accent: #FF4F1F; /* Signal Red/Orange for priority highlights */
-    --surface: #FFFFFF;
-    --surface-elevated: #F8F7F3;
-    --surface-card: #FAF8F5;
-    --muted-text: #6B6862;
-    --bg-page: var(--bone);
-    --text-primary: var(--ink);
-    --border-color: var(--line);
+    /* Acne Studios Canonical Tokens (DESIGN.md) */
+    --color-electric-cobalt: #0018a8;
+    --color-ink-black: #000000;
+    --color-graphite: #6b6b6b;
+    --color-paper-white: #ffffff;
+    --color-bone: #f2f2f2;
+
+    /* Semantic Token Bindings */
+    --bone: var(--color-paper-white);
+    --ink: var(--color-ink-black);
+    --graphite: var(--color-graphite);
+    --stone: var(--color-graphite);
+    --line: var(--color-bone);
+    --line-subtle: rgba(0, 0, 0, 0.05);
+    --signal: var(--color-electric-cobalt);
+    --signal-accent: var(--color-electric-cobalt);
+    --surface: var(--color-paper-white);
+    --surface-elevated: var(--color-paper-white);
+    --surface-card: var(--color-paper-white);
+    --muted-text: var(--color-graphite);
+    --bg-page: var(--color-paper-white);
+    --text-primary: var(--color-ink-black);
+    --border-color: var(--color-bone);
     --font-serif: 'Instrument Serif', Georgia, serif;
+
+    /* Acne Studios Typography Tokens */
+    --text-display: 120px;
+    --leading-display: 1;
+    --tracking-display: -1.2px;
+
+    /* Spacing Units */
+    --spacing-unit: 4px;
+    --spacing-4: 4px;
+    --spacing-9: 9px;
+    --spacing-10: 10px;
+    --spacing-11: 11px;
+    --spacing-18: 18px;
+    --spacing-19: 19px;
+    --spacing-20: 20px;
+    --spacing-30: 30px;
+    --spacing-60: 60px;
   }
 
   .dark {
-    --bone: #0A0A0B;
-    --ink: #F3F1EC;
-    --graphite: #141416;
-    --stone: #8B8984;
-    --line: rgba(243, 241, 236, 0.14);
-    --line-subtle: rgba(243, 241, 236, 0.07);
-    --signal: #3882F6;
-    --signal-accent: #FF4F1F;
-    --surface: #121214;
-    --surface-elevated: #1A1A1D;
-    --surface-card: #161618;
-    --muted-text: #A19F9A;
-    --bg-page: #0A0A0B;
-    --text-primary: #F3F1EC;
-    --border-color: var(--line);
+    --color-electric-cobalt: #3d5afe;
+    --color-ink-black: #ffffff;
+    --color-graphite: #8a8a8a;
+    --color-paper-white: #000000;
+    --color-bone: #181818;
+
+    --bone: #000000;
+    --ink: #ffffff;
+    --graphite: #8a8a8a;
+    --stone: #8a8a8a;
+    --line: #181818;
+    --line-subtle: rgba(255, 255, 255, 0.06);
+    --signal: var(--color-electric-cobalt);
+    --signal-accent: var(--color-electric-cobalt);
+    --surface: #000000;
+    --surface-elevated: #060606;
+    --surface-card: #000000;
+    --muted-text: #8a8a8a;
+    --bg-page: #000000;
+    --text-primary: #ffffff;
+    --border-color: #181818;
   }
 
-  * {
+  *, *::before, *::after {
     border-color: var(--border-color);
+    box-shadow: none !important;
   }
 
   html {
@@ -69,11 +101,11 @@
   }
 }
 
-/* Typography Utility Classes */
+/* Typography Utility Classes (Acne Studios Editorial System) */
 .font-display {
-  letter-spacing: -0.04em;
-  font-weight: 450;
-  line-height: 0.95;
+  letter-spacing: -0.025em;
+  font-weight: 500;
+  line-height: 1;
 }
 
 .font-editorial-italic {
@@ -86,9 +118,25 @@
 .font-mono-tag {
   font-family: var(--font-geist-mono), monospace;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.72rem;
-  line-height: 1.2;
+  letter-spacing: 0.033em;
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+/* Editorial Text Link (Acne Studios Signature Interaction) */
+.editorial-link {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.033em;
+  color: var(--color-electric-cobalt);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.editorial-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 /* Architectural Hairline Elements */
@@ -114,15 +162,15 @@
 
 /* Fluid responsive type scale */
 .text-hero-fluid {
-  font-size: clamp(3rem, 11vw, 9.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  font-size: clamp(3.5rem, 11vw, 120px);
+  line-height: 1;
+  letter-spacing: -0.03em;
 }
 
 .text-editorial-lead {
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
-  line-height: 1.35;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.15rem, 2.2vw, 1.75rem);
+  line-height: 1.4;
+  letter-spacing: -0.015em;
 }
 
 /* Architectural plot grid background */

@@ -15,7 +15,7 @@ export function Footer() {
   const currentYear = siteConfig.establishedYear || 2026;
 
   return (
-    <footer className="w-full hairline-border-t bg-[var(--surface-elevated)] pt-16 pb-12 mt-24">
+    <footer className="w-full hairline-border-t bg-[var(--bg-page)] pt-16 pb-12 mt-20">
       <div className="w-full max-w-[1520px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 hairline-border-b">
@@ -190,7 +190,7 @@ export function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="group flex items-center gap-2 hover:text-[var(--signal)] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--signal)] p-1 rounded-sm"
+            className="group flex items-center gap-2 hover:text-[var(--signal)] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--signal)] p-1 rounded-none text-[10px] tracking-[0.033em]"
             aria-label="Scroll back to top of page"
           >
             <span>BACK TO TOP</span>

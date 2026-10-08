@@ -71,7 +71,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <button
             type="button"
             onClick={onClose}
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 border border-[var(--border-color)] hover:border-[var(--signal)] rounded-sm focus-visible:ring-2 focus-visible:ring-[var(--signal)] transition-colors"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 border border-[var(--border-color)] hover:border-[var(--signal)] rounded-none focus-visible:ring-2 focus-visible:ring-[var(--signal)] transition-colors"
             aria-label="Close navigation menu"
           >
             <X className="w-5 h-5 text-[var(--text-primary)]" strokeWidth={1.5} />
@@ -91,7 +91,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               className="group flex items-center justify-between py-4 transition-colors hover:text-[var(--signal)]"
             >
               <div className="flex items-baseline gap-4">
-                <span className="font-mono-tag text-xs text-[var(--stone)] group-hover:text-[var(--signal)]">
+                <span className="font-mono-tag text-[10px] tracking-[0.033em] text-[var(--stone)] group-hover:text-[var(--signal)]">
                   {link.code}
                 </span>
                 <div>
@@ -103,7 +103,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     {link.label}
                   </span>
                   {link.desc && (
-                    <span className="block font-mono-tag text-[10px] text-[var(--muted-text)] mt-0.5">
+                    <span className="block font-mono-tag text-[10px] tracking-[0.033em] text-[var(--muted-text)] mt-0.5">
                       {link.desc}
                     </span>
                   )}
@@ -123,7 +123,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <Link
           href="/contact"
           onClick={onClose}
-          className="w-full py-3.5 px-4 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] font-mono-tag text-xs text-center uppercase tracking-widest hover:bg-[var(--signal)] hover:text-white transition-colors rounded-sm"
+          className="w-full py-3.5 px-4 border border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--bg-page)] font-mono-tag text-[11px] tracking-[0.033em] text-center uppercase transition-colors rounded-none"
         >
           START A PROJECT →
         </Link>

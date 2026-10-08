@@ -102,7 +102,7 @@ export default async function ProductTemplatePage({ params }: PageProps) {
                 href={product.links.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] hover:bg-[var(--signal)] hover:text-white font-mono-tag text-xs tracking-wider uppercase transition-colors rounded-none flex items-center gap-2"
+                className="px-6 py-3.5 border border-[var(--ink)] bg-[var(--ink)] text-[var(--bg-page)] hover:bg-transparent hover:text-[var(--ink)] font-mono-tag text-[11px] tracking-[0.033em] uppercase transition-colors rounded-none flex items-center gap-2"
               >
                 <span>OPEN PRODUCT</span>
                 <ArrowUpRight className="w-4 h-4" />

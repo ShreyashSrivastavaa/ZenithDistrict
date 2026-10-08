@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import { siteConfig } from '@/data/site';
 import { divisions } from '@/data/divisions';
-import { MagneticWrapper } from '@/components/ui/MagneticWrapper';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import { TRANSITION_EASE } from '@/lib/motion';
 
@@ -103,22 +102,20 @@ export function Hero() {
 
         {/* Primary and Secondary Action CTAs */}
         <div className="pt-4 flex flex-wrap items-center gap-4 sm:gap-6">
-          <MagneticWrapper strength={10}>
-            <Link
-              href="/contact"
-              className="px-6 py-3.5 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] hover:bg-[var(--signal)] hover:text-white dark:hover:bg-[var(--signal)] dark:hover:text-white font-mono-tag text-xs tracking-widest uppercase transition-colors rounded-none flex items-center gap-2 border border-transparent shadow-xs"
-            >
-              <span>START A PROJECT</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </MagneticWrapper>
+          <Link
+            href="/contact"
+            className="px-6 py-3.5 border border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--bg-page)] font-mono-tag text-[11px] tracking-[0.033em] uppercase transition-colors rounded-none flex items-center gap-2"
+          >
+            <span>START A PROJECT</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
 
           <a
             href="#district-section"
-            className="px-6 py-3.5 border border-[var(--border-color)] hover:border-[var(--signal)] bg-[var(--surface-elevated)] font-mono-tag text-xs tracking-widest uppercase transition-colors rounded-none flex items-center gap-2 text-[var(--text-primary)]"
+            className="px-6 py-3.5 border border-[var(--border-color)] hover:border-[var(--ink)] text-[var(--text-primary)] font-mono-tag text-[11px] tracking-[0.033em] uppercase transition-colors rounded-none flex items-center gap-2"
           >
             <span>EXPLORE THE DISTRICT</span>
-            <ArrowDown className="w-4 h-4 text-[var(--stone)]" />
+            <ArrowDown className="w-3.5 h-3.5 text-[var(--stone)]" />
           </a>
         </div>
       </div>

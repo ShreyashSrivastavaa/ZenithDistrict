@@ -368,7 +368,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-8 py-3.5 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] hover:bg-[var(--signal)] hover:text-white dark:hover:bg-[var(--signal)] dark:hover:text-white font-mono-tag text-xs tracking-wider uppercase transition-colors rounded-none flex items-center justify-center gap-2 disabled:opacity-50"
+          className="px-8 py-3.5 border border-[var(--ink)] bg-[var(--ink)] text-[var(--bg-page)] hover:bg-transparent hover:text-[var(--ink)] font-mono-tag text-[11px] tracking-[0.033em] uppercase transition-colors rounded-none flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {isSubmitting ? (
             <>

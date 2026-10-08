@@ -56,7 +56,7 @@ export function Header() {
           isVisible ? 'translate-y-0' : '-translate-y-full'
         } ${
           hasScrolled
-            ? 'bg-[var(--bg-page)]/90 backdrop-blur-md hairline-border-b shadow-xs'
+            ? 'bg-[var(--bg-page)]/95 backdrop-blur-md hairline-border-b'
             : 'bg-transparent'
         }`}
       >
@@ -69,7 +69,7 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav
             aria-label="Main Navigation"
-            className="hidden lg:flex items-center gap-7 text-xs font-mono-tag tracking-wider"
+            className="hidden lg:flex items-center gap-7 text-[11px] font-mono-tag tracking-[0.033em]"
           >
             {siteConfig.navigation.map((item) => {
               const isActive = pathname === item.href;
@@ -99,12 +99,12 @@ export function Header() {
             })}
           </nav>
 
-          {/* Right Actions: Theme Toggle + CTA */}
+          {/* Right Actions: Theme Toggle + Editorial CTA */}
           <div className="hidden lg:flex items-center gap-4">
             <ThemeToggle />
             <Link
               href="/contact"
-              className="px-4 py-2 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] font-mono-tag text-xs tracking-wider uppercase hover:bg-[var(--signal)] hover:text-white transition-colors duration-200 border border-transparent rounded-sm"
+              className="px-4 py-2 border border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-[var(--bg-page)] font-mono-tag text-[10px] tracking-[0.033em] uppercase transition-colors rounded-none"
             >
               START A PROJECT
             </Link>

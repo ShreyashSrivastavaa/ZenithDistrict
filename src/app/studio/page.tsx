@@ -50,7 +50,7 @@ export default function StudioPage() {
           <div className="pt-4 flex flex-wrap items-center gap-4 font-mono-tag text-xs">
             <Link
               href="/contact?type=Studio+project"
-              className="px-6 py-3.5 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] hover:bg-[var(--signal)] hover:text-white dark:hover:bg-[var(--signal)] dark:hover:text-white uppercase tracking-wider transition-colors flex items-center gap-2 rounded-none"
+              className="px-6 py-3.5 border border-[var(--ink)] bg-[var(--ink)] text-[var(--bg-page)] hover:bg-transparent hover:text-[var(--ink)] font-mono-tag text-[11px] tracking-[0.033em] uppercase transition-colors flex items-center gap-2 rounded-none"
             >
               <span>DISCUSS A PROJECT</span>
               <ArrowRight className="w-4 h-4" />
