@@ -1,0 +1,14 @@
+<svg width="128" height="128" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="zdBlue" x1="45" y1="15" x2="85" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#60A5FA"/>
+      <stop offset="40%" stopColor="#3882F6"/>
+      <stop offset="100%" stopColor="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="20" fill="#0A0A0B"/>
+  <g transform="translate(5, 5) scale(0.9)">
+    <path d="M18 20 H68 L60 28 H34 L64 68 H74 V76 H22 L30 68 H54 L24 28 H18 V20 Z" fill="#F3F1EC"/>
+    <path d="M48 20 C68 20 84 32 84 50 C84 66 70 76 46 76 H40 L46 68 C64 68 74 60 74 50 C74 38 62 28 44 28 H40 L48 20 Z" fill="url(#zdBlue)"/>
+  </g>
+</svg>
