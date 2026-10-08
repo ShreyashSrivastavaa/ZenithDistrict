@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/layout/SectionHeader';
 import { LabsBoard } from '@/components/ventures/LabsBoard';
+import { HyperspeedLabCard } from '@/components/ventures/HyperspeedLabCard';
 import { getLabs } from '@/lib/content';
 import { constructMetadata } from '@/lib/seo';
 
@@ -26,7 +27,19 @@ export default async function LabsPage() {
           caption="Active technical prototyping and early hypotheses undergoing lifecycle stress-testing."
         />
 
-        <LabsBoard experiments={experiments} />
+        <div className="space-y-16">
+          <LabsBoard experiments={experiments} />
+
+          <div className="space-y-6 pt-8 hairline-border-t">
+            <SectionHeader
+              index="R&D"
+              title="CAD ACCELERATOR LAB"
+              code="LAB_06"
+              caption="Interactive WebGL raymarching and post-processing testbed running live in the browser."
+            />
+            <HyperspeedLabCard />
+          </div>
+        </div>
 
         <div className="pt-12 hairline-border-t flex items-center justify-between font-mono-tag text-xs text-[var(--stone)]">
           <span>GRADUATION MODEL: IDEA → EXPLORING → BUILDING → BETA → LIVE → VENTURE</span>
