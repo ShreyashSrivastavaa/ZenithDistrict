@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { GridOverlay } from '@/components/layout/GridOverlay';
+import { Analytics } from '@vercel/analytics/next';
 import { constructMetadata, generateOrganizationJsonLd, safeJsonLdStringify } from '@/lib/seo';
 
 const geistSans = Geist({
@@ -55,6 +56,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <GridOverlay />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
