@@ -6,7 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { StatusTag } from '@/components/ui/StatusTag';
 import { Tag } from '@/components/ui/Tag';
 import { getProducts, getProductBySlug } from '@/lib/content';
-import { constructMetadata, generateVentureJsonLd } from '@/lib/seo';
+import { constructMetadata, generateVentureJsonLd, safeJsonLdStringify } from '@/lib/seo';
 import { ArrowLeft, ArrowUpRight, Code2 } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/BrandSocialIcons';
 
@@ -53,7 +53,7 @@ export default async function ProductTemplatePage({ params }: PageProps) {
     <div className="py-12 md:py-20 space-y-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
 
       <Container>

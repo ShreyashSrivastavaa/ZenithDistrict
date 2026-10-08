@@ -6,7 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { StatusTag } from '@/components/ui/StatusTag';
 import { Tag } from '@/components/ui/Tag';
 import { getBrands, getBrandBySlug } from '@/lib/content';
-import { constructMetadata, generateVentureJsonLd } from '@/lib/seo';
+import { constructMetadata, generateVentureJsonLd, safeJsonLdStringify } from '@/lib/seo';
 import { ArrowLeft, ArrowUpRight, Box } from 'lucide-react';
 
 type PageProps = {
@@ -56,7 +56,7 @@ export default async function BrandTemplatePage({ params }: PageProps) {
     >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
 
       <Container>

@@ -6,7 +6,7 @@ import { Container } from '@/components/layout/Container';
 import { StatusTag } from '@/components/ui/StatusTag';
 import { Tag } from '@/components/ui/Tag';
 import { getLabs, getLabBySlug } from '@/lib/content';
-import { constructMetadata, generateVentureJsonLd } from '@/lib/seo';
+import { constructMetadata, generateVentureJsonLd, safeJsonLdStringify } from '@/lib/seo';
 import { ArrowLeft, Lightbulb, Compass, Milestone, CheckCircle2 } from 'lucide-react';
 
 type PageProps = {
@@ -52,7 +52,7 @@ export default async function LabTemplatePage({ params }: PageProps) {
     <div className="py-12 md:py-20 space-y-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
 
       <Container>

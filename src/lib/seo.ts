@@ -104,3 +104,14 @@ export function generateVentureJsonLd(venture: AnyVenture) {
     keywords: venture.tags.join(', '),
   };
 }
+
+/**
+ * Safely serializes data into a JSON string suitable for inline <script> tags.
+ * Escapes '<', '>', and '&' to prevent HTML parser breakouts and XSS.
+ */
+export function safeJsonLdStringify(data: unknown): string {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}

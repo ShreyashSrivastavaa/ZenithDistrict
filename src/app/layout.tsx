@@ -5,7 +5,7 @@ import { ThemeProvider } from '@/components/theme/ThemeProvider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { GridOverlay } from '@/components/layout/GridOverlay';
-import { constructMetadata, generateOrganizationJsonLd } from '@/lib/seo';
+import { constructMetadata, generateOrganizationJsonLd, safeJsonLdStringify } from '@/lib/seo';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,7 +37,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(orgJsonLd) }}
         />
         <meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0A0A0B" media="(prefers-color-scheme: dark)" />
