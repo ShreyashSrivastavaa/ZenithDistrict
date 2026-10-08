@@ -1,13 +1,36 @@
 'use client';
-
+ 
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Division, AnyVenture } from '@/data/types';
 import { DistrictMap } from './DistrictMap';
 import { DistrictList } from './DistrictList';
 import { StatusTag } from '@/components/ui/StatusTag';
+import { Tag } from '@/components/ui/Tag';
 import { STATUS_ORDER } from '@/data/status';
-import { LayoutGrid, List, ArrowRight } from 'lucide-react';
+import { studioServices } from '@/data/services';
+import { BranchedMenu, BranchedMenuItem } from '@/components/ui/BranchedMenu';
+import {
+  LayoutGrid,
+  List,
+  ArrowRight,
+  GitBranch,
+  ExternalLink,
+  CheckCircle2,
+} from 'lucide-react';
+import {
+  CpuIcon,
+  PaintBoardIcon,
+  Layers01Icon,
+  Rocket01Icon,
+  Settings02Icon,
+  FlashIcon,
+  ShoppingBag01Icon,
+  Download04Icon,
+  GitBranchIcon,
+  Atom01Icon,
+  CursorPointer01Icon,
+} from '@hugeicons/core-free-icons';
 
 interface DistrictFullViewProps {
   divisions: Division[];
@@ -22,9 +45,10 @@ export function DistrictFullView({
   venturesByDivision,
   serviceCount,
 }: DistrictFullViewProps) {
-  const [viewMode, setViewMode] = useState<'map' | 'list'>('map');
+  const [viewMode, setViewMode] = useState<'map' | 'tree' | 'list'>('map');
   const [selectedDivision, setSelectedDivision] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
+  const [activeTreeValue, setActiveTreeValue] = useState<string>('i-hate-love-pdf');
 
   const filteredVentures = allVentures.filter((venture) => {
     if (selectedDivision !== 'all' && venture.divisionSlug !== selectedDivision) {
@@ -99,6 +123,20 @@ export function DistrictFullView({
             </button>
             <button
               type="button"
+              onClick={() => setViewMode('tree')}
+              className={`p-1.5 flex items-center gap-1.5 font-mono-tag text-xs ${
+                viewMode === 'tree'
+                  ? 'bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)]'
+                  : 'text-[var(--stone)] hover:text-[var(--text-primary)]'
+              }`}
+              title="Interactive Branch Tree"
+              aria-label="Switch to Interactive Branch Tree"
+            >
+              <GitBranch className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">BRANCH TREE</span>
+            </button>
+            <button
+              type="button"
               onClick={() => setViewMode('list')}
               className={`p-1.5 flex items-center gap-1.5 font-mono-tag text-xs ${
                 viewMode === 'list'
@@ -116,7 +154,7 @@ export function DistrictFullView({
       </div>
 
       {/* View Rendering */}
-      {viewMode === 'map' ? (
+      {viewMode === 'map' && (
         <div className="space-y-12">
           <DistrictMap
             divisions={divisions}
@@ -162,7 +200,374 @@ export function DistrictFullView({
             </div>
           </div>
         </div>
-      ) : (
+      )}
+
+      {viewMode === 'tree' && (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between font-mono-tag text-xs text-[var(--stone)] pb-2 hairline-border-b">
+            <span className="flex items-center gap-2 text-[var(--signal)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--signal)] animate-pulse" />
+              INTERACTIVE HIERARCHY AST // BRANCH TREE
+            </span>
+            <span>CLICK BRANCH TO INSPECT DOSSIER</span>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left Column: BranchedMenu (5 cols) */}
+            <div className="lg:col-span-5 p-5 sm:p-6 border border-[var(--border-color)] bg-[var(--surface-elevated)] space-y-4">
+              <div className="flex items-center justify-between pb-3 hairline-border-b text-[10px] font-mono-tag text-[var(--muted-text)]">
+                <span>SECTOR TREE NAVIGATION</span>
+                <span className="text-[var(--signal)]">LIVE VECTOR RAILS</span>
+              </div>
+
+              <div className="py-2 overflow-x-auto">
+                <BranchedMenu
+                  items={
+                    (selectedDivision === 'all'
+                      ? [
+                          {
+                            label: 'Z-01 STUDIO (SERVICES)',
+                            children: studioServices.map((service) => ({
+                              value: `service-${service.id}`,
+                              label: service.title,
+                              icon:
+                                service.id === 'web-dev'
+                                  ? Layers01Icon
+                                  : service.id === 'saas-dev'
+                                  ? Settings02Icon
+                                  : service.id === 'ai-integrations'
+                                  ? CpuIcon
+                                  : service.id === 'backend-api'
+                                  ? Settings02Icon
+                                  : service.id === 'ui-ux-design'
+                                  ? PaintBoardIcon
+                                  : FlashIcon,
+                            })),
+                          },
+                          {
+                            label: 'Z-02 BRANDS (CONSUMER)',
+                            children: (venturesByDivision['brands'] || []).map((brand) => ({
+                              value: brand.slug,
+                              label: brand.name,
+                              icon: ShoppingBag01Icon,
+                            })),
+                          },
+                          {
+                            label: 'Z-03 PRODUCTS (SOFTWARE)',
+                            children: (venturesByDivision['products'] || []).map((prod) => ({
+                              value: prod.slug,
+                              label: prod.name,
+                              icon:
+                                prod.slug === 'i-hate-love-pdf'
+                                  ? Download04Icon
+                                  : prod.slug === 'gitfc'
+                                  ? GitBranchIcon
+                                  : prod.slug === 'product-forum'
+                                  ? CursorPointer01Icon
+                                  : Rocket01Icon,
+                            })),
+                          },
+                          {
+                            label: 'Z-04 LABS (RESEARCH)',
+                            children: (venturesByDivision['labs'] || []).map((lab) => ({
+                              value: lab.slug,
+                              label: lab.name,
+                              icon:
+                                lab.slug === 'local-vector-rag'
+                                  ? CpuIcon
+                                  : lab.slug === 'algorithmic-garment-patterns'
+                                  ? PaintBoardIcon
+                                  : lab.slug === 'agentic-cad-plotter'
+                                  ? FlashIcon
+                                  : Atom01Icon,
+                            })),
+                          },
+                        ]
+                      : [
+                          selectedDivision === 'studio'
+                            ? {
+                                label: 'Z-01 STUDIO (SERVICES)',
+                                children: studioServices.map((service) => ({
+                                  value: `service-${service.id}`,
+                                  label: service.title,
+                                  icon:
+                                    service.id === 'web-dev'
+                                      ? Layers01Icon
+                                      : service.id === 'saas-dev'
+                                      ? Settings02Icon
+                                      : service.id === 'ai-integrations'
+                                      ? CpuIcon
+                                      : service.id === 'backend-api'
+                                      ? Settings02Icon
+                                      : service.id === 'ui-ux-design'
+                                      ? PaintBoardIcon
+                                      : FlashIcon,
+                                })),
+                              }
+                            : selectedDivision === 'brands'
+                            ? {
+                                label: 'Z-02 BRANDS (CONSUMER)',
+                                children: (venturesByDivision['brands'] || []).map((brand) => ({
+                                  value: brand.slug,
+                                  label: brand.name,
+                                  icon: ShoppingBag01Icon,
+                                })),
+                              }
+                            : selectedDivision === 'products'
+                            ? {
+                                label: 'Z-03 PRODUCTS (SOFTWARE)',
+                                children: (venturesByDivision['products'] || []).map((prod) => ({
+                                  value: prod.slug,
+                                  label: prod.name,
+                                  icon:
+                                    prod.slug === 'i-hate-love-pdf'
+                                      ? Download04Icon
+                                      : prod.slug === 'gitfc'
+                                      ? GitBranchIcon
+                                      : prod.slug === 'product-forum'
+                                      ? CursorPointer01Icon
+                                      : Rocket01Icon,
+                                })),
+                              }
+                            : {
+                                label: 'Z-04 LABS (RESEARCH)',
+                                children: (venturesByDivision['labs'] || []).map((lab) => ({
+                                  value: lab.slug,
+                                  label: lab.name,
+                                  icon:
+                                    lab.slug === 'local-vector-rag'
+                                      ? CpuIcon
+                                      : lab.slug === 'algorithmic-garment-patterns'
+                                      ? PaintBoardIcon
+                                      : lab.slug === 'agentic-cad-plotter'
+                                      ? FlashIcon
+                                      : Atom01Icon,
+                                })),
+                              },
+                        ]
+                    ) as BranchedMenuItem[]
+                  }
+                  defaultOpen={[0, 1, 2, 3]}
+                  defaultActive={activeTreeValue}
+                  onSelect={(val) => setActiveTreeValue(val)}
+                  width={380}
+                  rowHeight={38}
+                  indent={42}
+                  trunk={14}
+                  radius={10}
+                  lineWidth={1.5}
+                  fontSize={13}
+                  drawDuration={350}
+                  foldDuration={280}
+                  color="var(--text-primary)"
+                  accentColor="var(--signal)"
+                  lineColor="var(--border-color)"
+                />
+              </div>
+            </div>
+
+            {/* Right Column: Node Specification Dossier Card (7 cols) */}
+            <div className="lg:col-span-7 border border-[var(--border-color)] bg-[var(--surface-elevated)] p-6 sm:p-8 space-y-6">
+              {(() => {
+                const activeService = studioServices.find(
+                  (s) => s.id === activeTreeValue || `service-${s.id}` === activeTreeValue
+                );
+                const activeVenture = allVentures.find((v) => v.slug === activeTreeValue);
+
+                if (activeService) {
+                  return (
+                    <div className="space-y-6">
+                      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 hairline-border-b">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono-tag text-xs font-semibold px-2 py-0.5 border border-[var(--border-color)] text-[var(--signal)]">
+                            Z-01
+                          </span>
+                          <span className="font-mono-tag text-[11px] text-[var(--stone)] uppercase">
+                            STUDIO // SERVICE PRACTICE {activeService.number}
+                          </span>
+                        </div>
+                        <span className="font-mono-tag text-xs px-2 py-0.5 border border-[var(--signal)] text-[var(--signal)] bg-[var(--signal)]/10">
+                          ACTIVE PRACTICE
+                        </span>
+                      </div>
+
+                      <div>
+                        <h3 className="font-display text-2xl sm:text-3xl font-medium text-[var(--text-primary)]">
+                          {activeService.title}
+                        </h3>
+                        <p className="text-sm sm:text-base text-[var(--muted-text)] mt-2 leading-relaxed">
+                          {activeService.shortDesc}
+                        </p>
+                      </div>
+
+                      <div className="p-4 border border-[var(--border-color)] bg-[var(--surface)] space-y-3">
+                        <span className="font-mono-tag text-[10px] text-[var(--signal)] uppercase block">
+                          CORE DELIVERABLES & ARCHITECTURAL SCOPE
+                        </span>
+                        <ul className="space-y-2 text-xs sm:text-sm text-[var(--text-primary)]">
+                          {activeService.deliverables.map((item, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[var(--signal)] mt-0.5 shrink-0" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="p-3 border border-[var(--border-color)] bg-[var(--surface)] text-xs text-[var(--muted-text)]">
+                        <span className="font-mono-tag text-[10px] text-[var(--stone)] block mb-1 uppercase">
+                          PRODUCTION OUTCOME:
+                        </span>
+                        <p className="italic text-[var(--text-primary)]">
+                          &ldquo;{activeService.outcomes}&rdquo;
+                        </p>
+                      </div>
+
+                      <div className="pt-4 hairline-border-t">
+                        <Link
+                          href="/studio#services"
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] font-mono-tag text-xs font-medium hover:bg-[var(--signal)] hover:text-white transition-colors"
+                        >
+                          <span>INQUIRE STUDIO PRACTICE</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                }
+
+                if (activeVenture) {
+                  return (
+                    <div className="space-y-6">
+                      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 hairline-border-b">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono-tag text-xs font-semibold px-2 py-0.5 border border-[var(--border-color)] text-[var(--signal)]">
+                            {activeVenture.division}
+                          </span>
+                          <span className="font-mono-tag text-[11px] text-[var(--stone)] uppercase">
+                            {activeVenture.divisionSlug}
+                            {' // SPECIFICATION'}
+                          </span>
+                        </div>
+                        <StatusTag status={activeVenture.status} size="sm" />
+                      </div>
+
+                      <div>
+                        <h3 className="font-display text-2xl sm:text-3xl font-medium text-[var(--text-primary)]">
+                          {activeVenture.name}
+                        </h3>
+                        <p className="text-sm sm:text-base text-[var(--muted-text)] mt-2 leading-relaxed">
+                          {activeVenture.tagline}
+                        </p>
+                      </div>
+
+                      <div className="p-4 border border-[var(--border-color)] bg-[var(--surface)] text-xs sm:text-sm text-[var(--text-primary)] leading-relaxed space-y-3">
+                        <p>{activeVenture.description}</p>
+                        {'problem' in activeVenture && activeVenture.problem && (
+                          <div className="pt-3 hairline-border-t space-y-2">
+                            <div>
+                              <span className="font-mono-tag text-[10px] text-[var(--signal)] uppercase block mb-1">
+                                PROBLEM SPACE
+                              </span>
+                              <p className="text-xs text-[var(--muted-text)]">{activeVenture.problem}</p>
+                            </div>
+                            <div>
+                              <span className="font-mono-tag text-[10px] text-[var(--signal)] uppercase block mb-1">
+                                SOLUTION SPECIFICATION
+                              </span>
+                              <p className="text-xs text-[var(--muted-text)]">{activeVenture.solution}</p>
+                            </div>
+                          </div>
+                        )}
+                        {'hypothesis' in activeVenture && activeVenture.hypothesis && (
+                          <div className="pt-3 hairline-border-t space-y-2">
+                            <span className="font-mono-tag text-[10px] text-[var(--signal)] uppercase block mb-1">
+                              RESEARCH HYPOTHESIS
+                            </span>
+                            <p className="text-xs text-[var(--muted-text)]">{activeVenture.hypothesis}</p>
+                            {activeVenture.nextMilestone && (
+                              <p className="text-xs text-[var(--stone)] pt-1">
+                                <span className="font-semibold text-[var(--text-primary)]">Next Milestone:</span>{' '}
+                                {activeVenture.nextMilestone}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                        {'story' in activeVenture && activeVenture.story && (
+                          <div className="pt-3 hairline-border-t">
+                            <span className="font-mono-tag text-[10px] text-[var(--signal)] uppercase block mb-1">
+                              BRAND THESIS
+                            </span>
+                            <p className="text-xs text-[var(--muted-text)]">{activeVenture.story}</p>
+                          </div>
+                        )}
+                      </div>
+
+                      {activeVenture.tags && activeVenture.tags.length > 0 && (
+                        <div className="space-y-2">
+                          <span className="font-mono-tag text-[10px] text-[var(--stone)] block">
+                            TAGS // CAPABILITIES:
+                          </span>
+                          <div className="flex flex-wrap gap-1.5">
+                            {activeVenture.tags.map((tag) => (
+                              <Tag key={tag} size="sm">
+                                {tag}
+                              </Tag>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="pt-4 hairline-border-t flex flex-wrap items-center gap-3">
+                        <Link
+                          href={`/${activeVenture.divisionSlug}/${activeVenture.slug}`}
+                          className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--ink)] text-[var(--bone)] dark:bg-[var(--bone)] dark:text-[var(--ink)] font-mono-tag text-xs font-medium hover:bg-[var(--signal)] hover:text-white transition-colors"
+                        >
+                          <span>OPEN FULL DOSSIER</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+
+                        {activeVenture.links?.live && (
+                          <a
+                            href={activeVenture.links.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-2 border border-[var(--border-color)] hover:border-[var(--signal)] font-mono-tag text-xs text-[var(--text-primary)] transition-colors"
+                          >
+                            <span>LIVE SURFACE</span>
+                            <ExternalLink className="w-3 h-3 text-[var(--stone)]" />
+                          </a>
+                        )}
+
+                        {activeVenture.links?.repo && (
+                          <a
+                            href={activeVenture.links.repo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-2 border border-[var(--border-color)] hover:border-[var(--signal)] font-mono-tag text-xs text-[var(--text-primary)] transition-colors"
+                          >
+                            <span>REPOSITORY</span>
+                            <ExternalLink className="w-3 h-3 text-[var(--stone)]" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="p-8 text-center space-y-3 text-[var(--muted-text)] font-mono-tag text-xs">
+                    <GitBranch className="w-8 h-8 mx-auto text-[var(--stone)]" />
+                    <p>Select any branch on the tree to inspect its operational specification.</p>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {viewMode === 'list' && (
         <div className="space-y-6">
           <DistrictList
             divisions={divisions}
