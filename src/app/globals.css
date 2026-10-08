@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bone: #F3F1EC;
+    --ink: #0A0A0B;
+    --graphite: #1A1A1D;
+    --stone: #8B8984;
+    --line: rgba(10, 10, 11, 0.12);
+    --line-subtle: rgba(10, 10, 11, 0.06);
+    --signal: #3882F6; /* Official ZenithDistrict Electric Blue */
+    --signal-accent: #FF4F1F; /* Signal Red/Orange for priority highlights */
+    --surface: #FFFFFF;
+    --surface-elevated: #F8F7F3;
+    --surface-card: #FAF8F5;
+    --muted-text: #6B6862;
+    --bg-page: var(--bone);
+    --text-primary: var(--ink);
+    --border-color: var(--line);
+    --font-serif: 'Instrument Serif', Georgia, serif;
+  }
+
+  .dark {
+    --bone: #0A0A0B;
+    --ink: #F3F1EC;
+    --graphite: #141416;
+    --stone: #8B8984;
+    --line: rgba(243, 241, 236, 0.14);
+    --line-subtle: rgba(243, 241, 236, 0.07);
+    --signal: #3882F6;
+    --signal-accent: #FF4F1F;
+    --surface: #121214;
+    --surface-elevated: #1A1A1D;
+    --surface-card: #161618;
+    --muted-text: #A19F9A;
+    --bg-page: #0A0A0B;
+    --text-primary: #F3F1EC;
+    --border-color: var(--line);
+  }
+
+  * {
+    border-color: var(--border-color);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  /* Accessibility: Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Typography Utility Classes */
+.font-display {
+  letter-spacing: -0.04em;
+  font-weight: 450;
+  line-height: 0.95;
+}
+
+.font-editorial-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.font-mono-tag {
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+/* Architectural Hairline Elements */
+.hairline-border-b {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hairline-border-t {
+  border-top: 1px solid var(--border-color);
+}
+
+.hairline-border-l {
+  border-left: 1px solid var(--border-color);
+}
+
+.hairline-border-r {
+  border-right: 1px solid var(--border-color);
+}
+
+.hairline-border {
+  border: 1px solid var(--border-color);
+}
+
+/* Fluid responsive type scale */
+.text-hero-fluid {
+  font-size: clamp(3rem, 11vw, 9.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.text-editorial-lead {
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+/* Architectural plot grid background */
+.architectural-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, var(--line-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line-subtle) 1px, transparent 1px);
+}
+
+/* Subtle noise overlay (under 2% opacity) */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Keyboard focus rings */
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
