@@ -115,8 +115,8 @@
 /* Fluid responsive type scale */
 .text-hero-fluid {
   font-size: clamp(3rem, 11vw, 9.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.045em;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
 }
 
 .text-editorial-lead {

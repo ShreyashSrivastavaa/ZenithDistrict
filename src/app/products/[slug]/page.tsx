@@ -10,6 +10,8 @@ import { constructMetadata, generateVentureJsonLd, safeJsonLdStringify } from '@
 import { ArrowLeft, ArrowUpRight, Code2 } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/BrandSocialIcons';
 
+export const instant = false;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };

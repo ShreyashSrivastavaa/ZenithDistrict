@@ -67,11 +67,11 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+          <ThemeToggle className="min-h-[44px] px-3 py-2 flex items-center" />
           <button
             type="button"
             onClick={onClose}
-            className="p-2 border border-[var(--border-color)] hover:border-[var(--signal)] rounded-sm focus-visible:ring-2 focus-visible:ring-[var(--signal)]"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 border border-[var(--border-color)] hover:border-[var(--signal)] rounded-sm focus-visible:ring-2 focus-visible:ring-[var(--signal)] transition-colors"
             aria-label="Close navigation menu"
           >
             <X className="w-5 h-5 text-[var(--text-primary)]" strokeWidth={1.5} />

@@ -9,6 +9,8 @@ import { getBrands, getBrandBySlug } from '@/lib/content';
 import { constructMetadata, generateVentureJsonLd, safeJsonLdStringify } from '@/lib/seo';
 import { ArrowLeft, ArrowUpRight, Box } from 'lucide-react';
 
+export const instant = false;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };

@@ -71,7 +71,7 @@ export function Hero() {
 
       {/* Dominant Hero Typographic Block */}
       <div className="my-auto py-12 md:py-16 space-y-6 md:space-y-8">
-        <div className="overflow-hidden">
+        <div className="py-1 overflow-visible">
           {shouldReduceMotion ? (
             <h1 className="text-hero-fluid font-display tracking-tight text-[var(--text-primary)]">
               Building what’s{' '}
@@ -81,7 +81,7 @@ export function Hero() {
             </h1>
           ) : (
             <motion.h1
-              initial={{ y: '100%', opacity: 0 }}
+              initial={{ y: 24, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.85, ease: TRANSITION_EASE }}
               className="text-hero-fluid font-display tracking-tight text-[var(--text-primary)]"

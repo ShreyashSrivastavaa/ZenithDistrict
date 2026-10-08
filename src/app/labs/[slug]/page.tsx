@@ -9,6 +9,8 @@ import { getLabs, getLabBySlug } from '@/lib/content';
 import { constructMetadata, generateVentureJsonLd, safeJsonLdStringify } from '@/lib/seo';
 import { ArrowLeft, Lightbulb, Compass, Milestone, CheckCircle2 } from 'lucide-react';
 
+export const instant = false;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
 };

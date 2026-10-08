@@ -17,7 +17,7 @@ export const metadata: Metadata = constructMetadata({
 
 export default function ContactPage() {
   return (
-    <div className="py-12 md:py-20 space-y-16">
+    <div className="pt-12 md:pt-20 pb-24 md:pb-36 space-y-16">
       <Container>
         <SectionHeader
           index="MSG"
