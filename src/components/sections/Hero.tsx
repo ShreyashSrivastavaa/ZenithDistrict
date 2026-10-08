@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
 import { siteConfig } from '@/data/site';
 import { divisions } from '@/data/divisions';
-import { CoordinateReadout } from '@/components/district/CoordinateReadout';
 import { MagneticWrapper } from '@/components/ui/MagneticWrapper';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import { TRANSITION_EASE } from '@/lib/motion';
@@ -38,9 +37,6 @@ export function Hero() {
       className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-between overflow-hidden pt-8 pb-8 px-4 sm:px-6 md:px-8 lg:px-12 max-w-[1520px] mx-auto select-none"
       aria-label="ZenithDistrict Hero Introduction"
     >
-      {/* Live Coordinate Readout (desktop cursor following) */}
-      <CoordinateReadout />
-
       {/* Background Architectural Grid with Subtle Parallax */}
       <div
         className="absolute inset-0 pointer-events-none transition-transform duration-300 ease-out -z-10"
@@ -57,20 +53,6 @@ export function Hero() {
         <div className="absolute top-3/4 left-0 right-0 h-[1px] bg-[var(--line-subtle)]" />
         <div className="absolute left-1/3 top-0 bottom-0 w-[1px] bg-[var(--line-subtle)]" />
         <div className="absolute left-2/3 top-0 bottom-0 w-[1px] bg-[var(--line-subtle)]" />
-
-        {/* Four District Plot Corner Markers */}
-        <div className="absolute top-12 left-12 text-[10px] font-mono-tag text-[var(--stone)]/40 hidden md:block">
-          SEC_01 // Z-01
-        </div>
-        <div className="absolute top-12 right-12 text-[10px] font-mono-tag text-[var(--stone)]/40 hidden md:block">
-          SEC_02 // Z-02
-        </div>
-        <div className="absolute bottom-24 left-12 text-[10px] font-mono-tag text-[var(--stone)]/40 hidden md:block">
-          SEC_03 // Z-03
-        </div>
-        <div className="absolute bottom-24 right-12 text-[10px] font-mono-tag text-[var(--stone)]/40 hidden md:block">
-          SEC_04 // Z-04
-        </div>
       </div>
 
       {/* Top Ledger Strip */}

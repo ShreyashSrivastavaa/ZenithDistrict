@@ -10,7 +10,7 @@ export const divisions: Division[] = [
     leadParagraph:
       'The Studio is our client-service division. We partner with select founders and organizations to design, architect, and ship high-craft web systems, SaaS platforms, and AI integrations.',
     route: '/studio',
-    plotCoord: 'QUAD_NW // 40.7128°N',
+    plotCoord: 'SECTOR NW // Z-01',
     colorToken: '#3882F6',
   },
   {
@@ -22,7 +22,7 @@ export const divisions: Division[] = [
     leadParagraph:
       'The Brands division conceives, manufactures, and operates consumer offerings. We test brand narratives, modern supply chains, and direct-to-consumer distribution.',
     route: '/brands',
-    plotCoord: 'QUAD_NE // 74.0060°W',
+    plotCoord: 'SECTOR NE // Z-02',
     colorToken: '#10B981',
   },
   {
@@ -34,7 +34,7 @@ export const divisions: Division[] = [
     leadParagraph:
       'The Products division builds specialized software born out of internal friction. We turn internal workflows and niche utilities into durable, focused web products.',
     route: '/products',
-    plotCoord: 'QUAD_SW // 28.6139°N',
+    plotCoord: 'SECTOR SW // Z-03',
     colorToken: '#8B5CF6',
   },
   {
@@ -46,7 +46,7 @@ export const divisions: Division[] = [
     leadParagraph:
       'The Labs division is where ideas are explored before they earn the right to become products or companies. Fast iterations, open code experiments, and transparent failures.',
     route: '/labs',
-    plotCoord: 'QUAD_SE // 77.2090°E',
+    plotCoord: 'SECTOR SE // Z-04',
     colorToken: '#FF4F1F',
   },
 ];

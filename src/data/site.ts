@@ -18,7 +18,7 @@ export const siteConfig: SiteConfig = {
     showNewsletter: false, // Placeholder toggle
     showCommunity: false,
     showInvestors: false,
-    showGridDevToggle: true, // Press 'G' to toggle architectural hairline grid
+    showGridDevToggle: false, // Architectural grid overlay disabled
   },
   socials: {
     github: 'https://github.com/ShreyashSrivastavaa', // Primary repository hub

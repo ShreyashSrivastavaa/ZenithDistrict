@@ -188,4 +188,3 @@ All data access is mediated through `src/lib/content.ts`. To migrate to Sanity, 
 npm run dev
 ```
 Visit `http://localhost:3000`.
-Press **`G`** to inspect the 12-column architectural grid.
