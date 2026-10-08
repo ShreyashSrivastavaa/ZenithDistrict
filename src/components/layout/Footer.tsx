@@ -23,7 +23,7 @@ export function Footer() {
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <LogoMark size={28} variant="gradient" />
+                <LogoMark size={28} variant="solid" />
                 <Wordmark withTagline={true} />
               </div>
               <p className="text-sm text-[var(--muted-text)] max-w-md leading-relaxed font-normal">

@@ -6,6 +6,7 @@ import { foundersData } from '@/data/founders';
 import { constructMetadata } from '@/lib/seo';
 import { Cpu, Shield } from 'lucide-react';
 import { GithubIcon, XIcon } from '@/components/ui/BrandSocialIcons';
+import { LogoMark } from '@/components/brand/LogoMark';
 
 export const metadata: Metadata = constructMetadata({
   title: 'About the District // Venture Model & Operating Architecture',
@@ -58,12 +59,13 @@ export default function AboutPage() {
           <div className="w-full overflow-x-auto py-4">
             <div className="min-w-[700px] flex flex-col items-center">
               {/* Parent Apex Box */}
-              <div className="p-5 border-2 border-[var(--ink)] dark:border-[var(--bone)] bg-[var(--surface)] text-center w-80 shadow-xs">
+              <div className="p-5 border-2 border-[var(--ink)] dark:border-[var(--bone)] bg-[var(--surface)] text-center w-80 shadow-xs flex flex-col items-center">
+                <LogoMark size={24} className="mb-2 text-[var(--text-primary)]" />
                 <span className="font-mono-tag text-[10px] text-[var(--signal)] font-semibold block">
                   PARENT HOLDING & VENTURE HOUSE
                 </span>
-                <span className="font-display text-xl font-medium text-[var(--text-primary)] block mt-1">
-                  ZENITHDISTRICT
+                <span className="font-display text-xl font-medium text-[var(--text-primary)] block mt-1 tracking-wide">
+                  ZENITH DISTRICT
                 </span>
                 <span className="text-[11px] text-[var(--muted-text)] block mt-0.5">
                   Core Engineering & Capital Allocation

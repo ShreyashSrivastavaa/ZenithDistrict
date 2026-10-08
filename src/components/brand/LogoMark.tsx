@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 
 interface LogoMarkProps {
@@ -7,109 +6,36 @@ interface LogoMarkProps {
   variant?: 'gradient' | 'outline' | 'solid' | 'monochrome';
 }
 
+const ZD_MARK_PATH =
+  'M 453,299 L 442,313 L 427,327 L 418,334 L 399,346 L 384,353 L 376,355 L 376,367 L 415,366 L 416,363 L 418,361 L 429,342 L 445,312 Z M 369,82 L 354,101 L 312,150 L 312,264 L 351,254 L 359,251 L 365,250 L 369,248 Z M 678,69 L 672,64 L 666,61 L 653,57 L 640,55 L 608,55 L 582,58 L 590,58 L 591,57 L 604,56 L 627,56 L 649,59 L 658,62 L 664,65 L 671,72 L 674,80 L 674,85 L 671,95 L 664,107 L 645,128 L 631,140 L 607,158 L 604,159 L 601,162 L 595,165 L 586,172 L 571,181 L 568,177 L 565,170 L 554,154 L 537,136 L 521,124 L 503,114 L 488,108 L 475,104 L 444,98 L 433,97 L 376,97 L 376,101 L 414,101 L 424,102 L 438,105 L 452,110 L 463,116 L 476,126 L 489,140 L 497,152 L 504,166 L 510,183 L 514,201 L 517,226 L 518,250 L 517,286 L 514,312 L 509,333 L 503,350 L 496,364 L 489,375 L 481,385 L 471,395 L 459,404 L 441,413 L 422,418 L 414,419 L 369,418 L 369,274 L 358,277 L 355,279 L 315,291 L 314,292 L 312,292 L 312,377 L 310,388 L 304,400 L 293,411 L 279,420 L 270,424 L 427,424 L 437,423 L 468,417 L 492,409 L 512,399 L 530,387 L 548,370 L 565,347 L 575,328 L 580,315 L 584,301 L 588,275 L 588,245 L 586,229 L 583,214 L 576,192 L 573,187 L 572,180 L 574,180 L 580,176 L 592,170 L 628,147 L 651,129 L 668,112 L 678,98 L 683,84 L 682,76 Z M 589,63 L 586,63 L 585,62 L 582,62 L 574,59 L 567,52 L 565,49 L 562,39 L 562,33 L 562,35 L 561,36 L 561,41 L 558,50 L 551,58 L 545,61 L 538,63 L 533,63 L 531,65 L 521,66 L 499,71 L 466,80 L 472,79 L 480,76 L 484,76 L 488,74 L 492,74 L 496,72 L 533,64 L 541,64 L 549,67 L 557,75 L 561,85 L 561,90 L 562,91 L 562,93 L 562,87 L 563,83 L 567,74 L 574,67 L 582,64 L 586,64 L 587,63 Z M 0,306 L 2,311 L 9,318 L 15,321 L 24,324 L 34,326 L 45,327 L 64,326 L 75,327 L 70,332 L 67,337 L 58,348 L 41,364 L 306,364 L 306,358 L 124,357 L 142,334 L 146,330 L 141,330 L 140,331 L 123,333 L 117,332 L 279,292 L 352,270 L 378,261 L 405,250 L 444,232 L 497,210 L 509,204 L 436,233 L 379,253 L 347,263 L 292,278 L 234,297 L 224,299 L 204,306 L 165,317 L 158,315 L 277,169 L 388,36 L 401,22 L 406,15 L 419,2 L 423,0 L 117,0 L 124,8 L 128,16 L 131,25 L 133,40 L 133,52 L 130,74 L 124,94 L 120,102 L 123,98 L 124,95 L 128,90 L 137,74 L 142,68 L 143,65 L 159,44 L 178,26 L 196,15 L 209,10 L 229,6 L 333,7 L 311,34 L 296,54 L 274,80 L 246,116 L 223,143 L 204,168 L 194,179 L 134,253 L 131,258 L 76,325 L 55,325 L 37,323 L 23,319 L 15,314 L 10,308 L 9,305 L 9,296 L 12,288 L 21,275 L 46,250 L 75,227 L 105,206 L 154,176 L 187,158 L 219,142 L 186,158 L 142,182 L 102,206 L 68,229 L 36,254 L 15,274 L 9,281 L 1,295 L 0,299 Z';
+
 /**
- * ZenithDistrict Unified "ZD" Mark
- * Faithful vector rendering of the brand geometry from the official brand identity guide.
+ * ZenithDistrict Official ZD Celestial Monogram Mark
+ * Faithful vector rendering of the interlocking serif ZD with orbital celestial ring and zenith star.
  */
 export function LogoMark({
   className = '',
-  size = 32,
-  variant = 'gradient',
+  size = 28,
+  variant = 'solid',
 }: LogoMarkProps) {
-  const gradientIdZ = React.useId();
-  const gradientIdD = React.useId();
+  const width = Math.round(size * 1.58);
+  const height = size;
 
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 100"
-      fill="none"
+      width={width}
+      height={height}
+      viewBox="-10 -10 703 444"
+      fillRule="evenodd"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-label="ZenithDistrict Monogram"
+      className={`shrink-0 ${className}`}
+      aria-label="ZenithDistrict ZD Celestial Monogram"
       role="img"
     >
-      <defs>
-        {/* Silver/Platinum gradient for Z */}
-        <linearGradient
-          id={gradientIdZ}
-          x1="10"
-          y1="10"
-          x2="90"
-          y2="90"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#FFFFFF" />
-          <stop offset="50%" stopColor="#D1D5DB" />
-          <stop offset="100%" stopColor="#9CA3AF" />
-        </linearGradient>
-
-        {/* Electric Blue gradient for D */}
-        <linearGradient
-          id={gradientIdD}
-          x1="45"
-          y1="15"
-          x2="85"
-          y2="85"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#60A5FA" />
-          <stop offset="40%" stopColor="#3882F6" />
-          <stop offset="100%" stopColor="#1D4ED8" />
-        </linearGradient>
-      </defs>
-
-      {variant === 'outline' ? (
-        <g stroke="currentColor" strokeWidth="3" fill="none">
-          {/* Z stroke outline */}
-          <path d="M22 25 L68 25 L34 75 L80 75" strokeLinecap="square" />
-          {/* D loop outline */}
-          <path
-            d="M44 25 C74 25 86 42 86 52 C86 64 74 75 48 75"
-            strokeLinecap="round"
-          />
-        </g>
-      ) : variant === 'solid' ? (
-        <g fill="currentColor">
-          {/* Z letterform */}
-          <path
-            d="M18 20 H68 L60 28 H34 L64 68 H74 V76 H22 L30 68 H54 L24 28 H18 V20 Z"
-          />
-          {/* D interlocking curve */}
-          <path
-            d="M48 20 C68 20 84 32 84 50 C84 66 70 76 46 76 H40 L46 68 C64 68 74 60 74 50 C74 38 62 28 44 28 H40 L48 20 Z"
-          />
-        </g>
-      ) : variant === 'monochrome' ? (
-        <g>
-          {/* Z dark/light neutral */}
-          <path
-            d="M18 20 H68 L60 28 H34 L64 68 H74 V76 H22 L30 68 H54 L24 28 H18 V20 Z"
-            fill="#6B7280"
-          />
-          {/* D darker neutral */}
-          <path
-            d="M48 20 C68 20 84 32 84 50 C84 66 70 76 46 76 H40 L46 68 C64 68 74 60 74 50 C74 38 62 28 44 28 H40 L48 20 Z"
-            fill="#4B5563"
-          />
-        </g>
-      ) : (
-        /* Default: Official Gradient Mark */
-        <g>
-          {/* Z segment with silver gradient on dark, or ink on light */}
-          <path
-            d="M18 20 H68 L60 28 H34 L64 68 H74 V76 H22 L30 68 H54 L24 28 H18 V20 Z"
-            fill="currentColor"
-            className="text-stone-900 dark:text-stone-100"
-          />
-          {/* D segment with brand Electric Blue gradient */}
-          <path
-            d="M48 20 C68 20 84 32 84 50 C84 66 70 76 46 76 H40 L46 68 C64 68 74 60 74 50 C74 38 62 28 44 28 H40 L48 20 Z"
-            fill={`url(#${gradientIdD})`}
-          />
-        </g>
-      )}
+      <path
+        d={ZD_MARK_PATH}
+        fill={variant === 'monochrome' ? '#71717A' : 'currentColor'}
+      />
     </svg>
   );
 }

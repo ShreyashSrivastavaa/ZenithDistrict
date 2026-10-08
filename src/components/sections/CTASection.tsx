@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Container } from '@/components/layout/Container';
 import { MagneticWrapper } from '@/components/ui/MagneticWrapper';
 import { ArrowRight } from 'lucide-react';
+import { LogoMark } from '@/components/brand/LogoMark';
 
 export function CTASection() {
   return (
@@ -10,11 +11,17 @@ export function CTASection() {
       className="w-full bg-[#0A0A0B] text-[#F3F1EC] py-24 sm:py-32 md:py-40 select-none relative overflow-hidden"
       aria-label="Call to Action: Work with ZenithDistrict"
     >
-      {/* Background Architectural Grid */}
+      {/* Background Architectural Grid & Celestial Monogram Watermark */}
       <div
         className="absolute inset-0 architectural-grid opacity-20 pointer-events-none"
         aria-hidden="true"
       />
+      <div
+        className="absolute -right-16 -bottom-20 opacity-[0.05] pointer-events-none select-none text-[#F3F1EC] hidden md:block"
+        aria-hidden="true"
+      >
+        <LogoMark size={340} variant="solid" />
+      </div>
 
       <Container>
         <div className="max-w-4xl mx-auto space-y-8 text-center sm:text-left">

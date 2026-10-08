@@ -61,7 +61,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4 sm:p-6 hairline-border-b">
         <div className="flex items-center gap-3">
-          <LogoMark size={24} variant="gradient" />
+          <LogoMark size={24} variant="solid" />
           <span className="font-mono-tag tracking-wider text-xs">
             INDEX DIRECTORY
           </span>
