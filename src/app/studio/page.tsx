@@ -5,6 +5,7 @@ import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/layout/SectionHeader';
 import { Accordion } from '@/components/ui/Accordion';
 import { Tag } from '@/components/ui/Tag';
+import { ProjectsDomeSection } from '@/components/sections/ProjectsDomeSection';
 import {
   studioServices,
   processSteps,
@@ -60,6 +61,9 @@ export default function StudioPage() {
           </div>
         </div>
       </Container>
+
+      {/* 1.5. Interactive 3D Projects Archive Dome */}
+      <ProjectsDomeSection />
 
       {/* 2. Detailed Services */}
       <Container>
