@@ -62,7 +62,10 @@ export function constructMetadata({
       },
     },
     icons: {
-      icon: '/favicon.ico',
+      icon: [
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: 'any' },
+      ],
       apple: '/brand/apple-touch-icon.png',
     },
   };

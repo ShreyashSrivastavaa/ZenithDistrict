@@ -1,0 +1,100 @@
+import fs from 'fs';
+import path from 'path';
+import { chromium } from 'playwright';
+import { execSync } from 'child_process';
+
+const ZD_MARK_PATH = `M 453,299 L 442,313 L 427,327 L 418,334 L 399,346 L 384,353 L 376,355 L 376,367 L 415,366 L 416,363 L 418,361 L 429,342 L 445,312 Z M 369,82 L 354,101 L 312,150 L 312,264 L 351,254 L 359,251 L 365,250 L 369,248 Z M 678,69 L 672,64 L 666,61 L 653,57 L 640,55 L 608,55 L 582,58 L 590,58 L 591,57 L 604,56 L 627,56 L 649,59 L 658,62 L 664,65 L 671,72 L 674,80 L 674,85 L 671,95 L 664,107 L 645,128 L 631,140 L 607,158 L 604,159 L 601,162 L 595,165 L 586,172 L 571,181 L 568,177 L 565,170 L 554,154 L 537,136 L 521,124 L 503,114 L 488,108 L 475,104 L 444,98 L 433,97 L 376,97 L 376,101 L 414,101 L 424,102 L 438,105 L 452,110 L 463,116 L 476,126 L 489,140 L 497,152 L 504,166 L 510,183 L 514,201 L 517,226 L 518,250 L 517,286 L 514,312 L 509,333 L 503,350 L 496,364 L 489,375 L 481,385 L 471,395 L 459,404 L 441,413 L 422,418 L 414,419 L 369,418 L 369,274 L 358,277 L 355,279 L 315,291 L 314,292 L 312,292 L 312,377 L 310,388 L 304,400 L 293,411 L 279,420 L 270,424 L 427,424 L 437,423 L 468,417 L 492,409 L 512,399 L 530,387 L 548,370 L 565,347 L 575,328 L 580,315 L 584,301 L 588,275 L 588,245 L 586,229 L 583,214 L 576,192 L 573,187 L 572,180 L 574,180 L 580,176 L 592,170 L 628,147 L 651,129 L 668,112 L 678,98 L 683,84 L 682,76 Z M 589,63 L 586,63 L 585,62 L 582,62 L 574,59 L 567,52 L 565,49 L 562,39 L 562,33 L 562,35 L 561,36 L 561,41 L 558,50 L 551,58 L 545,61 L 538,63 L 533,63 L 531,65 L 521,66 L 499,71 L 466,80 L 472,79 L 480,76 L 484,76 L 488,74 L 492,74 L 496,72 L 533,64 L 541,64 L 549,67 L 557,75 L 561,85 L 561,90 L 562,91 L 562,93 L 562,87 L 563,83 L 567,74 L 574,67 L 582,64 L 586,64 L 587,63 Z M 0,306 L 2,311 L 9,318 L 15,321 L 24,324 L 34,326 L 45,327 L 64,326 L 75,327 L 70,332 L 67,337 L 58,348 L 41,364 L 306,364 L 306,358 L 124,357 L 142,334 L 146,330 L 141,330 L 140,331 L 123,333 L 117,332 L 279,292 L 352,270 L 378,261 L 405,250 L 444,232 L 497,210 L 509,204 L 436,233 L 379,253 L 347,263 L 292,278 L 234,297 L 224,299 L 204,306 L 165,317 L 158,315 L 277,169 L 388,36 L 401,22 L 406,15 L 419,2 L 423,0 L 117,0 L 124,8 L 128,16 L 131,25 L 133,40 L 133,52 L 130,74 L 124,94 L 120,102 L 123,98 L 124,95 L 128,90 L 137,74 L 142,68 L 143,65 L 159,44 L 178,26 L 196,15 L 209,10 L 229,6 L 333,7 L 311,34 L 296,54 L 274,80 L 246,116 L 223,143 L 204,168 L 194,179 L 134,253 L 131,258 L 76,325 L 55,325 L 37,323 L 23,319 L 15,314 L 10,308 L 9,305 L 9,296 L 12,288 L 21,275 L 46,250 L 75,227 L 105,206 L 154,176 L 187,158 L 219,142 L 186,158 L 142,182 L 102,206 L 68,229 L 36,254 L 15,274 L 9,281 L 1,295 L 0,299 Z`;
+
+// Official 512x512 Master Favicon SVG
+// Background: Deep obsidian squircle (#0A0A0B) with rx=110
+// Mark: Warm bone (#F3F1EC) scaled and optically centered
+const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="zdBorder" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#27272A"/>
+      <stop offset="100%" stop-color="#18181B"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Squircle Plate -->
+  <rect width="512" height="512" rx="108" fill="#0A0A0B"/>
+  <rect x="1" y="1" width="510" height="510" rx="107" fill="none" stroke="url(#zdBorder)" stroke-width="2"/>
+  
+  <!-- Optical Monogram Center: 683x424 bounds scaled to ~386x240 inside 512x512 -->
+  <g transform="translate(63, 136) scale(0.565)">
+    <path d="${ZD_MARK_PATH}" fill="#F3F1EC" fill-rule="evenodd"/>
+  </g>
+</svg>`;
+
+async function main() {
+  console.log('[FAVICON] Generating SVG files...');
+  
+  // 1. Write SVG icons
+  fs.writeFileSync('public/favicon.svg', svgContent, 'utf-8');
+  fs.writeFileSync('public/icon.svg', svgContent, 'utf-8');
+  fs.writeFileSync('src/app/icon.svg', svgContent, 'utf-8');
+  console.log('[PASS] Written public/favicon.svg, public/icon.svg, src/app/icon.svg');
+
+  // 2. Render raster assets using Playwright Chromium
+  console.log('[FAVICON] Rendering raster icons with Playwright...');
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  // Create an HTML wrapper with the SVG
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body, html { width: 100%; height: 100%; background: transparent; display: flex; align-items: center; justify-content: center; }
+          svg { width: 100%; height: 100%; display: block; }
+        </style>
+      </head>
+      <body>
+        ${svgContent}
+      </body>
+    </html>
+  `;
+
+  await page.setContent(html);
+
+  // Render 512x512 master PNG
+  await page.setViewportSize({ width: 512, height: 512 });
+  const master512 = 'public/brand/android-chrome-512x512.png';
+  await page.screenshot({ path: master512, omitBackground: true });
+  console.log('[PASS] Rendered 512x512');
+
+  // Render 192x192 PNG
+  await page.setViewportSize({ width: 192, height: 192 });
+  const master192 = 'public/brand/android-chrome-192x192.png';
+  await page.screenshot({ path: master192, omitBackground: true });
+  console.log('[PASS] Rendered 192x192');
+
+  // Render 180x180 Apple Touch Icon
+  await page.setViewportSize({ width: 180, height: 180 });
+  const appleTouch = 'public/brand/apple-touch-icon.png';
+  await page.screenshot({ path: appleTouch, omitBackground: true });
+  fs.copyFileSync(appleTouch, 'src/app/apple-icon.png');
+  console.log('[PASS] Rendered 180x180 apple-touch-icon.png');
+
+  // Render 32x32 and 16x16
+  await page.setViewportSize({ width: 32, height: 32 });
+  await page.screenshot({ path: 'scripts/favicon-32.png', omitBackground: true });
+  await page.setViewportSize({ width: 16, height: 16 });
+  await page.screenshot({ path: 'scripts/favicon-16.png', omitBackground: true });
+  await page.setViewportSize({ width: 48, height: 48 });
+  await page.screenshot({ path: 'scripts/favicon-48.png', omitBackground: true });
+  console.log('[PASS] Rendered 16, 32, 48 PNGs');
+
+  await browser.close();
+
+  // 3. Generate multi-resolution ICO via Python PIL
+  console.log('[FAVICON] Generating multi-resolution ICO file...');
+  execSync('python -c "from PIL import Image; img16=Image.open(\'scripts/favicon-16.png\'); img32=Image.open(\'scripts/favicon-32.png\'); img48=Image.open(\'scripts/favicon-48.png\'); img32.save(\'public/favicon.ico\', format=\'ICO\', sizes=[(16,16),(32,32),(48,48)]); img32.save(\'src/app/favicon.ico\', format=\'ICO\', sizes=[(16,16),(32,32),(48,48)])"', { stdio: 'inherit' });
+  console.log('[ALL DONE] All favicons and application icons updated to official ZD logo!');
+}
+
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
