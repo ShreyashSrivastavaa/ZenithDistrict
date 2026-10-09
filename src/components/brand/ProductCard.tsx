@@ -20,14 +20,21 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const productHref = `/brands/${APPAREL_BRAND_SLUG}/shop/${product.slug}?color=${selectedColorway.id}`;
 
   return (
-    <div data-priority={priority ? 'true' : undefined} className="group flex flex-col space-y-4">
-      {/* Product Image Stage (4:5 Aspect Ratio) with Pointer Hover Crossfade */}
+    <div data-priority={priority ? 'true' : undefined} className="group flex flex-col w-full h-full relative">
+      {/* Caption ABOVE image, overlaid slightly if needed or just block */}
+      <div className="absolute top-0 left-0 w-full z-10 pt-[30px] px-2 md:px-[10px] pointer-events-none">
+        <h2 className="font-mono-tag text-[10px] uppercase text-[var(--ink)] tracking-[0.033em] leading-tight">
+          {product.name}
+        </h2>
+      </div>
+
+      {/* Product Image Stage (Full Bleed, 4:5 Aspect Ratio) with Pointer Hover Crossfade */}
       <Link
         href={productHref}
-        className="relative block w-full overflow-hidden bg-[#F8F7F4] dark:bg-[#0A0A0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--signal)]"
+        className="relative block w-full overflow-hidden bg-[var(--surface-paper-white)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--signal)]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        aria-label={`${product.name} — ${selectedColorway.label} — ${formattedPrice}`}
+        aria-label={`${product.name}`}
       >
         {/* Primary View: Front */}
         <div
@@ -61,65 +68,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             alt={`${product.name} in ${selectedColorway.label}, back view`}
           />
         </div>
-
-        {/* Quiet Concept Availability Indicator */}
-        <div className="absolute top-3 left-3 pointer-events-none">
-          <span className="font-mono-tag text-[9px] text-[var(--stone)] tracking-widest uppercase">
-            [{product.availability.toUpperCase()}]
-          </span>
-        </div>
       </Link>
-
-      {/* Product Information Strip */}
-      <div className="space-y-2">
-        {/* Top: Code & Tabular Price */}
-        <div className="flex items-center justify-between font-mono-tag text-xs">
-          <span className="text-[var(--stone)] tracking-wider">
-            {product.code}
-          </span>
-          <span className="font-semibold text-[var(--text-primary)] tabular-nums">
-            {formattedPrice}
-          </span>
-        </div>
-
-        {/* Middle: Title */}
-        <Link
-          href={productHref}
-          className="block font-medium text-base text-[var(--text-primary)] hover:text-[var(--signal)] transition-colors leading-snug tracking-tight"
-        >
-          {product.name}
-        </Link>
-
-        {/* Bottom: Colorway Swatches */}
-        <div
-          className="flex items-center gap-2 pt-1"
-          role="radiogroup"
-          aria-label={`Available colorways for ${product.name}`}
-        >
-          {product.colorways.map((cw) => {
-            const isSelected = selectedColorway.id === cw.id;
-            return (
-              <button
-                key={cw.id}
-                type="button"
-                onClick={() => setSelectedColorway(cw)}
-                className={`relative w-4 h-4 rounded-full border transition-all ${
-                  isSelected
-                    ? 'border-[var(--text-primary)] scale-110 ring-1 ring-[var(--text-primary)]'
-                    : 'border-[var(--border-color)] opacity-75 hover:opacity-100'
-                }`}
-                style={{ backgroundColor: cw.hex }}
-                aria-label={`Select ${cw.label}`}
-                aria-checked={isSelected}
-                role="radio"
-              />
-            );
-          })}
-          <span className="text-[11px] font-mono-tag text-[var(--stone)] ml-1">
-            {selectedColorway.label}
-          </span>
-        </div>
-      </div>
     </div>
   );
 }

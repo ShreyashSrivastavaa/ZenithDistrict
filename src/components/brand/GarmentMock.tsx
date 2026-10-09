@@ -111,68 +111,16 @@ export function GarmentMock({
     );
   }
 
-  const { garmentColor, seamColor, ribColor, inkColor, shadowColor } = getGarmentPalette(
-    colorway.garmentHex || colorway.hex
-  );
-
-  const viewBox = getViewBox(view, print.type);
-  const filterId = `cotton-grain-${colorway.id}`;
-
+  // Tasteful neutral placeholder for missing photography
   return (
     <div
-      className={`relative w-full ${aspectClass} overflow-hidden flex flex-col justify-between select-none bg-[#F8F7F4] dark:bg-[#0A0A0B] ${className}`}
+      className={`relative w-full ${aspectClass} flex items-center justify-center bg-[#F8F7F4] dark:bg-[#0A0A0B] ${className}`}
       role="img"
       aria-label={imageAlt}
     >
-      <svg
-        viewBox={viewBox}
-        className="w-full h-full object-contain pointer-events-none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <defs>
-          {/* Subtle unbleached cotton grain noise filter */}
-          <filter id={filterId} x="0%" y="0%" width="100%" height="100%">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.8"
-              numOctaves="3"
-              result="noise"
-            />
-            <feColorMatrix
-              type="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.04 0"
-            />
-            <feBlend mode="multiply" in="SourceGraphic" result="blend" />
-          </filter>
-        </defs>
-
-        {/* 1. Base Garment Vector Geometry */}
-        <GarmentSilhouettes
-          silhouette={silhouette}
-          view={view}
-          garmentColor={garmentColor}
-          shadowColor={shadowColor}
-          seamColor={seamColor}
-          ribColor={ribColor}
-          filterId={filterId}
-        />
-
-        {/* 2. Architectural Vector Prints */}
-        <GarmentPrints print={print} view={view} inkColor={inkColor} />
-      </svg>
-
-      {/* Illustrative Render Notice (Shown quietly on PDP gallery, hidden once real photos are wired) */}
-      {showCaption && (
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-          <span className="font-mono-tag text-[9px] text-[var(--stone)] tracking-wider uppercase opacity-75">
-            Illustrative render. Final product may vary.
-          </span>
-          <span className="font-mono-tag text-[9px] text-[var(--stone)] tracking-wider uppercase opacity-75">
-            {view.replace('-', ' ')}
-          </span>
-        </div>
-      )}
+      <span className="font-mono-tag text-[10px] text-[var(--stone)] uppercase tracking-wider">
+        Image coming soon
+      </span>
     </div>
   );
 }

@@ -11,9 +11,12 @@ interface CollectionShopViewProps {
 export function CollectionShopView({ products }: CollectionShopViewProps) {
   const [selectedSilhouette, setSelectedSilhouette] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
+  const [selectedSize, setSelectedSize] = useState<string>('all');
+  const [selectedAvailability, setSelectedAvailability] = useState<string>('all');
+  const [sortOption, setSortOption] = useState<string>('featured');
 
   const silhouettes = [
-    { id: 'all', label: 'All Silhouettes' },
+    { id: 'all', label: 'All Cuts' },
     { id: 'oversized-tee', label: 'Oversized Tee' },
     { id: 'boxy-cropped-tee', label: 'Boxy Cropped' },
     { id: 'oversized-long-sleeve', label: 'Long Sleeve' },
@@ -29,52 +32,113 @@ export function CollectionShopView({ products }: CollectionShopViewProps) {
     { id: 'moss', label: 'Moss' },
   ];
 
+  const sizes = [
+    { id: 'all', label: 'All Sizes' },
+    { id: 'XS', label: 'XS' },
+    { id: 'S', label: 'S' },
+    { id: 'M', label: 'M' },
+    { id: 'L', label: 'L' },
+    { id: 'XL', label: 'XL' },
+    { id: 'XXL', label: 'XXL' },
+  ];
+
+  const availabilities = [
+    { id: 'all', label: 'All Status' },
+    { id: 'concept', label: 'Concept' },
+    { id: 'sampling', label: 'Sampling' },
+    { id: 'preorder', label: 'Pre-Order' },
+    { id: 'available', label: 'Available' },
+  ];
+
+  const sortOptions = [
+    { id: 'featured', label: 'Featured' },
+    { id: 'price-asc', label: 'Price: Low to High' },
+    { id: 'price-desc', label: 'Price: High to Low' },
+  ];
+
   const filteredProducts = products.filter((p) => {
     const matchSilhouette = selectedSilhouette === 'all' || p.silhouette === selectedSilhouette;
     const matchColor = selectedColor === 'all' || p.colorways.some((c) => c.id === selectedColor);
-    return matchSilhouette && matchColor;
+    const matchSize = selectedSize === 'all' || p.sizes.includes(selectedSize as any);
+    const matchAvailability = selectedAvailability === 'all' || p.availability === selectedAvailability;
+    return matchSilhouette && matchColor && matchSize && matchAvailability;
+  }).sort((a, b) => {
+    if (sortOption === 'price-asc') return a.price - b.price;
+    if (sortOption === 'price-desc') return b.price - a.price;
+    return a.sortOrder - b.sortOrder;
   });
 
   return (
     <div className="space-y-12">
-      {/* Quiet Minimal Filter Row (No heavy sidebars) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-3 hairline-border-y font-mono-tag text-xs">
-        {/* Silhouette filter buttons */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-          <span className="text-[var(--stone)] uppercase tracking-wider mr-1">CUT:</span>
-          {silhouettes.map((s) => (
-            <button
-              key={s.id}
-              type="button"
-              onClick={() => setSelectedSilhouette(s.id)}
-              className={`transition-colors uppercase tracking-wider py-1 px-2 ${
-                selectedSilhouette === s.id
-                  ? 'bg-[var(--text-primary)] text-[var(--bg-page)] font-semibold'
-                  : 'text-[var(--muted-text)] hover:text-[var(--text-primary)]'
-              }`}
+      {/* Quiet Minimal Filter Row */}
+      <div className="flex flex-col gap-6 py-4 hairline-border-y font-mono-tag text-xs">
+        
+        {/* Filter Groups Row */}
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+          
+          {/* Silhouette */}
+          <div className="flex items-center gap-2">
+            <span className="text-[var(--stone)] uppercase tracking-wider">CUT:</span>
+            <select 
+              value={selectedSilhouette}
+              onChange={(e) => setSelectedSilhouette(e.target.value)}
+              className="bg-transparent text-[var(--text-primary)] border-none focus:ring-0 cursor-pointer uppercase outline-none"
             >
-              {s.label}
-            </button>
-          ))}
+              {silhouettes.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+            </select>
+          </div>
+
+          {/* Colorway */}
+          <div className="flex items-center gap-2">
+            <span className="text-[var(--stone)] uppercase tracking-wider">SHADE:</span>
+            <select 
+              value={selectedColor}
+              onChange={(e) => setSelectedColor(e.target.value)}
+              className="bg-transparent text-[var(--text-primary)] border-none focus:ring-0 cursor-pointer uppercase outline-none"
+            >
+              {colors.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
+            </select>
+          </div>
+
+          {/* Size */}
+          <div className="flex items-center gap-2">
+            <span className="text-[var(--stone)] uppercase tracking-wider">SIZE:</span>
+            <select 
+              value={selectedSize}
+              onChange={(e) => setSelectedSize(e.target.value)}
+              className="bg-transparent text-[var(--text-primary)] border-none focus:ring-0 cursor-pointer uppercase outline-none"
+            >
+              {sizes.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+            </select>
+          </div>
+
+          {/* Availability */}
+          <div className="flex items-center gap-2">
+            <span className="text-[var(--stone)] uppercase tracking-wider">STATUS:</span>
+            <select 
+              value={selectedAvailability}
+              onChange={(e) => setSelectedAvailability(e.target.value)}
+              className="bg-transparent text-[var(--text-primary)] border-none focus:ring-0 cursor-pointer uppercase outline-none"
+            >
+              {availabilities.map(a => <option key={a.id} value={a.id}>{a.label}</option>)}
+            </select>
+          </div>
+          
         </div>
 
-        {/* Colorway filter buttons */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          <span className="text-[var(--stone)] uppercase tracking-wider mr-1">SHADE:</span>
-          {colors.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              onClick={() => setSelectedColor(c.id)}
-              className={`transition-colors uppercase tracking-wider py-1 px-2 ${
-                selectedColor === c.id
-                  ? 'bg-[var(--text-primary)] text-[var(--bg-page)] font-semibold'
-                  : 'text-[var(--muted-text)] hover:text-[var(--text-primary)]'
-              }`}
+        {/* Sort Row */}
+        <div className="flex items-center justify-between border-t border-[var(--line-subtle)] pt-4">
+          <span className="text-[var(--stone)]">{filteredProducts.length} RESULTS</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[var(--stone)] uppercase tracking-wider">SORT:</span>
+            <select 
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+              className="bg-transparent text-[var(--text-primary)] border-none focus:ring-0 cursor-pointer uppercase outline-none text-right"
             >
-              {c.label}
-            </button>
-          ))}
+              {sortOptions.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -89,6 +153,9 @@ export function CollectionShopView({ products }: CollectionShopViewProps) {
             onClick={() => {
               setSelectedSilhouette('all');
               setSelectedColor('all');
+              setSelectedSize('all');
+              setSelectedAvailability('all');
+              setSortOption('featured');
             }}
             className="font-mono-tag text-xs text-[var(--signal)] underline uppercase"
           >
@@ -96,60 +163,10 @@ export function CollectionShopView({ products }: CollectionShopViewProps) {
           </button>
         </div>
       ) : (
-        <div className="space-y-16">
-          {/* Row 1: Asymmetric 7 : 5 Split */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-            {filteredProducts[0] && (
-              <div className="lg:col-span-7">
-                <ProductCard product={filteredProducts[0]} priority={true} />
-              </div>
-            )}
-            {filteredProducts[1] && (
-              <div className="lg:col-span-5 lg:pt-16">
-                <ProductCard product={filteredProducts[1]} />
-              </div>
-            )}
-          </div>
-
-          {/* Typographic Interstitial Between Rows */}
-          <div className="py-8 sm:py-12 hairline-border-y border-[var(--border-color)]">
-            <div className="max-w-4xl mx-auto text-center space-y-2">
-              <span className="font-mono-tag text-[10px] text-[var(--signal)] block uppercase tracking-widest">
-                SPECIFICATION PROTOCOL // Z-02
-              </span>
-              <p className="font-serif text-2xl sm:text-3xl text-[var(--text-primary)] italic">
-                “Every seam and stitch rendered with architectural discipline. Printed when ordered.”
-              </p>
-              <span className="font-mono-tag text-[10px] text-[var(--stone)] block uppercase tracking-wider">
-                100% COMBED ORGANIC COTTON · ZERO INVENTORY CARRYING COST
-              </span>
-            </div>
-          </div>
-
-          {/* Row 2: Alternating Asymmetric 5 : 7 Split */}
-          {filteredProducts.length > 2 && (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-              {filteredProducts[2] && (
-                <div className="lg:col-span-5 lg:pt-12">
-                  <ProductCard product={filteredProducts[2]} />
-                </div>
-              )}
-              {filteredProducts[3] && (
-                <div className="lg:col-span-7">
-                  <ProductCard product={filteredProducts[3]} />
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Additional rows if product catalog grows beyond 4 */}
-          {filteredProducts.length > 4 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.slice(4).map((p) => (
-                <ProductCard key={p.slug} product={p} />
-              ))}
-            </div>
-          )}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-0 w-full">
+          {filteredProducts.map((p) => (
+            <ProductCard key={p.slug} product={p} />
+          ))}
         </div>
       )}
     </div>
