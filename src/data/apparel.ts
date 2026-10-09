@@ -12,32 +12,30 @@ import { ApparelProduct } from './types';
 
 export const apparelProducts: ApparelProduct[] = [
   {
-    slug: 'oversized-tee-coordinates',
+    slug: 'unisex-oversized-jersey',
     code: 'ZB-01',
-    name: 'Oversized Tee "Coordinates"', // Working title
+    name: 'Unisex Oversized Jersey',
     silhouette: 'oversized-tee',
     colorways: [
-      { id: 'bone', label: 'Bone', hex: '#F5F2EB', garmentHex: '#F5F2EB' },
-      { id: 'ink', label: 'Ink', hex: '#151618', garmentHex: '#151618' },
-      { id: 'washed-grey', label: 'Washed Grey', hex: '#5C5D61', garmentHex: '#5C5D61' },
+      { id: 'white', label: 'White', hex: '#FFFFFF', garmentHex: '#FFFFFF' },
     ],
     print: {
       type: 'coordinates',
-      frontPlacement: 'Left chest: 72pt hairline coordinate string',
-      backPlacement: 'Upper back: Hairline plan drawing with quad-plot cadastre grid',
+      frontPlacement: 'Center chest: Sublimation Graphic',
+      backPlacement: 'Full back: Sublimation Graphic',
     },
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
-    disabledSizes: ['XXL'], // Honestly indicated as unproduced in current sampling run
+    disabledSizes: [],
     fitNote: 'Wide through the chest with a pronounced dropped shoulder. Sits naturally at the hip.',
-    availability: 'concept',
-    price: 3600, // TODO: confirm with supplier (Estimated benchmark in INR)
+    availability: 'pre-order',
+    price: 599, 
     currency: 'INR',
-    priceConfirmed: false, // Flagged: unconfirmed placeholder
+    priceConfirmed: true, 
     fabric: {
-      gsm: 240, // TODO: confirm with supplier
-      composition: '100% Combed Organic Cotton', // TODO: confirm with supplier
-      weave: 'Heavy single jersey, preshrunk', // TODO: confirm with supplier
-      unconfirmed: true,
+      gsm: 240, 
+      composition: '100% Combed Organic Cotton',
+      weave: 'Heavy single jersey, preshrunk',
+      unconfirmed: false,
     },
     care: [
       'Cold machine wash with like colors (30°C)',
@@ -46,7 +44,6 @@ export const apparelProducts: ApparelProduct[] = [
       'Do not tumble dry or bleach',
     ],
     sizeChart: [
-      // TODO: confirm with supplier (All measurements in cm, garment laid flat)
       { size: 'XS', chestCm: 56, lengthCm: 71, shoulderCm: 52, sleeveCm: 22 },
       { size: 'S', chestCm: 59, lengthCm: 73, shoulderCm: 54, sleeveCm: 23 },
       { size: 'M', chestCm: 62, lengthCm: 75, shoulderCm: 56, sleeveCm: 24 },
@@ -57,17 +54,17 @@ export const apparelProducts: ApparelProduct[] = [
     sortOrder: 1,
     featured: true,
     description:
-      'Heavyweight cotton cut with relaxed drop shoulders and an architectural drape. Features an index coordinate string on the left chest and a structural site plan diagram across the upper back.',
+      'Heavyweight unisex oversized jersey engineered for comfort and modern drape. Features precise sublimation prints on the front chest and full back.',
     details: [
-      '240 GSM heavy combed cotton single jersey (TODO: confirm with supplier)',
+      '240 GSM heavy combed cotton single jersey',
       '1x1 ribbed crew neck collar with twin-needle topstitch reinforcement',
       'Dropped shoulder seam with reinforced internal tape',
-      'Silk-screened vector plan graphic using water-based permeable pigment',
+      'High-fidelity Sublimation Print (Print Type 23)',
       'Internal woven neck label: "A ZenithDistrict brand"',
       'Engineered and printed to order on demand',
     ],
     productionNote:
-      'Produced strictly to order. Zero speculative warehouse inventory. Lead times reflect custom printing and individual quality check before dispatch.',
+      'Produced strictly to order via Qikink. Zero speculative warehouse inventory. Lead times reflect custom printing and individual quality check before dispatch.',
   },
   {
     slug: 'boxy-cropped-tee-blueprint',
