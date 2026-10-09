@@ -7,6 +7,7 @@ import { commerceAdapter } from '@/lib/commerce';
 import { GarmentMeasureDiagram } from './GarmentMeasureDiagram';
 import { ChevronDown, ArrowUpRight } from 'lucide-react';
 import { BrandWaitlistForm } from './BrandWaitlistForm';
+import { CheckoutModal } from './CheckoutModal';
 
 interface ProductInteractiveDetailsProps {
   product: ApparelProduct;
@@ -32,6 +33,7 @@ export function ProductInteractiveDetails({
   const [selectedSize, setSelectedSize] = useState<ApparelSize>('M');
   const [openAccordion, setOpenAccordion] = useState<string | null>('details');
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
   useEffect(() => {
     onColorwayChange?.(activeColorway);
@@ -192,6 +194,14 @@ export function ProductInteractiveDetails({
             <span>{primaryAction.label}</span>
             <ArrowUpRight className="w-4 h-4" />
           </a>
+        ) : primaryAction.type === 'internal_checkout' ? (
+          <button
+            type="button"
+            onClick={() => setShowCheckoutModal(true)}
+            className="w-full h-12 px-6 bg-[var(--text-primary)] text-[var(--bg-page)] hover:bg-[var(--signal)] hover:text-white font-mono-tag text-xs tracking-widest uppercase transition-colors rounded-none flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--signal)]"
+          >
+            <span>{primaryAction.label}</span>
+          </button>
         ) : (
           <button
             type="button"
@@ -220,6 +230,16 @@ export function ProductInteractiveDetails({
             caption={`We will notify you the moment this piece (${activeColorway.label}, Size ${selectedSize}) enters sampling.`}
           />
         </div>
+      )}
+
+      {/* Internal Checkout Modal */}
+      {showCheckoutModal && (
+        <CheckoutModal
+          product={product}
+          colorway={activeColorway.label}
+          size={selectedSize}
+          onClose={() => setShowCheckoutModal(false)}
+        />
       )}
 
       {/* 5. Detailed Tailor Accordions */}

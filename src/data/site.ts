@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
   location: 'Remote & Distributed',
   statusHeadline: 'One district. Many ventures.',
   shop: {
-    mode: 'preview', // Options: 'preview' | 'waitlist' | 'external' | 'live'
+    mode: 'live', // Options: 'preview' | 'waitlist' | 'external' | 'live'
   },
   flags: {
     showCareers: false, // Hidden until active roles are opened

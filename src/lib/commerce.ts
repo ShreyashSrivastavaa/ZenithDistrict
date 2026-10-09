@@ -2,7 +2,7 @@ import { siteConfig } from '@/data/site';
 import { ApparelProduct, ShopMode } from '@/data/types';
 
 export interface ProductAction {
-  type: 'waitlist' | 'external' | 'disabled' | 'inquire';
+  type: 'waitlist' | 'external' | 'disabled' | 'inquire' | 'internal_checkout';
   label: string;
   href?: string;
   external?: boolean;
@@ -86,13 +86,12 @@ export const commerceAdapter: CommerceAdapter = {
       ];
     }
 
-    // Live mode (stubbed for future cart)
+    // Live mode (trigger native checkout)
     return [
       {
-        type: 'disabled',
-        label: 'CHECKOUT COMING SOON',
-        disabled: true,
-        secondaryText: 'Direct online ordering will open following prototype validation.',
+        type: 'internal_checkout',
+        label: 'PURCHASE (PRINT ON DEMAND)',
+        secondaryText: 'Ships directly from our fulfillment partner.',
       },
     ];
   },
