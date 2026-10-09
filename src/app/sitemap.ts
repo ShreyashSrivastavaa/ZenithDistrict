@@ -1,12 +1,15 @@
 import { MetadataRoute } from 'next';
 import { getBrands, getProducts, getLabs } from '@/lib/content';
+import { getApparelProducts } from '@/data/apparel';
 import { siteUrl } from '@/lib/seo';
+import { APPAREL_BRAND_SLUG } from '@/data/brands';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [brands, products, labs] = await Promise.all([
+  const [brands, products, labs, apparelItems] = await Promise.all([
     getBrands(),
     getProducts(),
     getLabs(),
+    getApparelProducts(),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -60,11 +63,46 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const brandRoutes: MetadataRoute.Sitemap = brands.map((brand) => ({
-    url: `${siteUrl}/brands/${brand.slug}`,
+  const brandRoutes: MetadataRoute.Sitemap = brands.flatMap((brand) => {
+    const base: MetadataRoute.Sitemap = [
+      {
+        url: `${siteUrl}/brands/${brand.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.75,
+      },
+    ];
+
+    if (brand.slug === APPAREL_BRAND_SLUG) {
+      base.push(
+        {
+          url: `${siteUrl}/brands/${brand.slug}/shop`,
+          lastModified: new Date(),
+          changeFrequency: 'weekly' as const,
+          priority: 0.8,
+        },
+        {
+          url: `${siteUrl}/brands/${brand.slug}/story`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly' as const,
+          priority: 0.7,
+        },
+        {
+          url: `${siteUrl}/brands/${brand.slug}/size-guide`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly' as const,
+          priority: 0.7,
+        }
+      );
+    }
+    return base;
+  });
+
+  const apparelProductRoutes: MetadataRoute.Sitemap = apparelItems.map((p) => ({
+    url: `${siteUrl}/brands/${APPAREL_BRAND_SLUG}/shop/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
-    priority: 0.75,
+    priority: 0.85,
   }));
 
   const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
@@ -81,5 +119,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...brandRoutes, ...productRoutes, ...labRoutes];
+  return [
+    ...staticRoutes,
+    ...brandRoutes,
+    ...apparelProductRoutes,
+    ...productRoutes,
+    ...labRoutes,
+  ];
 }
