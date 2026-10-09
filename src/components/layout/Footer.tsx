@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Wordmark } from '@/components/brand/Wordmark';
 import { LogoMark } from '@/components/brand/LogoMark';
 import { siteConfig } from '@/data/site';
+import { APPAREL_BRAND_NAME, APPAREL_BRAND_SLUG } from '@/data/brands';
 import { ArrowUp } from 'lucide-react';
 
 export function Footer() {
@@ -59,6 +60,13 @@ export function Footer() {
                 >
                   <span className="text-[var(--stone)] text-[10px]">Z-02</span>
                   <span>Brands</span>
+                </Link>
+                <Link
+                  href={`/brands/${APPAREL_BRAND_SLUG}`}
+                  className="hover:text-[var(--signal)] transition-colors flex items-center gap-2 pl-4 pt-1 text-xs text-[var(--muted-text)]"
+                >
+                  <span className="text-[var(--stone)] text-[9px]">↳</span>
+                  <span className="truncate max-w-[140px]">{APPAREL_BRAND_NAME}</span>
                 </Link>
               </li>
               <li>

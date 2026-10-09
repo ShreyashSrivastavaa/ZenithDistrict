@@ -35,7 +35,14 @@ export function FeaturedVentures({ ventures }: FeaturedVenturesProps) {
         {/* Index Footer */}
         <div className="pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono-tag text-xs text-[var(--muted-text)]">
           <span>REAL WORK SHIPPED AND IN PROGRESS. NEVER FABRICATED NUMBERS.</span>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-6">
+            <Link
+              href="/brands"
+              className="hover:text-[var(--signal)] flex items-center gap-1 font-medium"
+            >
+              <span>ALL BRANDS</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
             <Link
               href="/products"
               className="hover:text-[var(--signal)] flex items-center gap-1 font-medium"

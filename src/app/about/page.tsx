@@ -1,8 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/layout/SectionHeader';
 import { foundersData } from '@/data/founders';
+import { APPAREL_BRAND_NAME, APPAREL_BRAND_SLUG } from '@/data/brands';
 import { constructMetadata } from '@/lib/seo';
 import { Cpu, Shield } from 'lucide-react';
 import { GithubIcon, XIcon } from '@/components/ui/BrandSocialIcons';
@@ -59,7 +61,7 @@ export default function AboutPage() {
           <div className="w-full overflow-x-auto py-4">
             <div className="min-w-[700px] flex flex-col items-center">
               {/* Parent Apex Box */}
-              <div className="p-5 border-2 border-[var(--ink)] dark:border-[var(--bone)] bg-[var(--surface)] text-center w-80 shadow-xs flex flex-col items-center">
+              <div className="p-5 border-2 border-[var(--ink)] dark:border-[var(--bone)] bg-[var(--surface)] text-center w-80 flex flex-col items-center">
                 <LogoMark size={24} className="mb-2 text-[var(--text-primary)]" />
                 <span className="font-mono-tag text-[10px] text-[var(--signal)] font-semibold block">
                   PARENT HOLDING & VENTURE HOUSE
@@ -83,13 +85,16 @@ export default function AboutPage() {
               <div className="h-8" />
 
               {/* 4 Division Nodes */}
-              <div className="w-full grid grid-cols-4 gap-4">
+              <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-4">
                 {/* Node 1: Studio */}
-                <div className="p-4 border border-[var(--border-color)] bg-[var(--surface)] text-center space-y-1">
+                <Link
+                  href="/studio"
+                  className="p-4 border border-[var(--border-color)] bg-[var(--surface)] hover:border-[var(--signal)] transition-colors text-center space-y-1 block group"
+                >
                   <span className="font-mono-tag text-[10px] text-[var(--signal)] block">
                     Z-01 STUDIO
                   </span>
-                  <span className="font-display text-base font-medium text-[var(--text-primary)] block">
+                  <span className="font-display text-base font-medium text-[var(--text-primary)] group-hover:text-[var(--signal)] transition-colors block">
                     Client Practice
                   </span>
                   <span className="text-[11px] text-[var(--muted-text)] block">
@@ -98,30 +103,36 @@ export default function AboutPage() {
                   <div className="mt-3 pt-2 hairline-border-t text-[10px] font-mono-tag text-[var(--stone)]">
                     Generates Cash Flow & Signal
                   </div>
-                </div>
+                </Link>
 
                 {/* Node 2: Brands */}
-                <div className="p-4 border border-[var(--border-color)] bg-[var(--surface)] text-center space-y-1">
+                <Link
+                  href={`/brands/${APPAREL_BRAND_SLUG}`}
+                  className="p-4 border border-[var(--border-color)] bg-[var(--surface)] hover:border-[var(--signal)] transition-colors text-center space-y-1 block group"
+                >
                   <span className="font-mono-tag text-[10px] text-[var(--signal)] block">
                     Z-02 BRANDS
                   </span>
-                  <span className="font-display text-base font-medium text-[var(--text-primary)] block">
+                  <span className="font-display text-base font-medium text-[var(--text-primary)] group-hover:text-[var(--signal)] transition-colors block">
                     Consumer Ventures
                   </span>
                   <span className="text-[11px] text-[var(--muted-text)] block">
                     On-Demand Physical Labels
                   </span>
-                  <div className="mt-3 pt-2 hairline-border-t text-[10px] font-mono-tag text-[var(--stone)]">
-                    Direct Consumer Connection
+                  <div className="mt-3 pt-2 hairline-border-t text-[10px] font-mono-tag text-[var(--stone)] truncate">
+                    Active: {APPAREL_BRAND_NAME} ↗
                   </div>
-                </div>
+                </Link>
 
                 {/* Node 3: Products */}
-                <div className="p-4 border border-[var(--border-color)] bg-[var(--surface)] text-center space-y-1">
+                <Link
+                  href="/products"
+                  className="p-4 border border-[var(--border-color)] bg-[var(--surface)] hover:border-[var(--signal)] transition-colors text-center space-y-1 block group"
+                >
                   <span className="font-mono-tag text-[10px] text-[var(--signal)] block">
                     Z-03 PRODUCTS
                   </span>
-                  <span className="font-display text-base font-medium text-[var(--text-primary)] block">
+                  <span className="font-display text-base font-medium text-[var(--text-primary)] group-hover:text-[var(--signal)] transition-colors block">
                     Digital Software
                   </span>
                   <span className="text-[11px] text-[var(--muted-text)] block">
@@ -130,14 +141,17 @@ export default function AboutPage() {
                   <div className="mt-3 pt-2 hairline-border-t text-[10px] font-mono-tag text-[var(--stone)]">
                     Durable Recurring Software
                   </div>
-                </div>
+                </Link>
 
                 {/* Node 4: Labs */}
-                <div className="p-4 border border-[var(--border-color)] bg-[var(--surface)] text-center space-y-1">
+                <Link
+                  href="/labs"
+                  className="p-4 border border-[var(--border-color)] bg-[var(--surface)] hover:border-[var(--signal)] transition-colors text-center space-y-1 block group"
+                >
                   <span className="font-mono-tag text-[10px] text-[var(--signal)] block">
                     Z-04 LABS
                   </span>
-                  <span className="font-display text-base font-medium text-[var(--text-primary)] block">
+                  <span className="font-display text-base font-medium text-[var(--text-primary)] group-hover:text-[var(--signal)] transition-colors block">
                     R&D Prototyping
                   </span>
                   <span className="text-[11px] text-[var(--muted-text)] block">
@@ -146,7 +160,7 @@ export default function AboutPage() {
                   <div className="mt-3 pt-2 hairline-border-t text-[10px] font-mono-tag text-[var(--stone)]">
                     Filter for High-Conviction Ideas
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

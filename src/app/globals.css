@@ -195,3 +195,26 @@
   outline: 2px solid var(--signal);
   outline-offset: 2px;
 }
+
+/* Anti-vibecoded typography craft enhancements */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Tabular figures for numbers, codes, prices */
+.font-mono,
+.font-mono-tag,
+[data-tabular] {
+  font-feature-settings: 'tnum' on, 'zero' on;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom editorial selection */
+::selection {
+  background-color: var(--signal);
+  color: #ffffff;
+}

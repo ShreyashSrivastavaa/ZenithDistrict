@@ -48,6 +48,24 @@ export function BrandsPreview({ brands }: BrandsPreviewProps) {
           </div>
         </div>
 
+        {/* Active Collection 01 Spotlight */}
+        {firstBrand && (
+          <div className="mt-6 p-4 border border-[var(--border-color)] bg-[var(--surface-elevated)]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono-tag text-xs">
+            <div className="flex items-center gap-2 text-[var(--text-primary)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--signal)]" />
+              <span>COLLECTION 01 IN SAMPLING</span>
+              <span className="text-[var(--stone)]">— 4 Architectural Silhouettes (ZB-01–04)</span>
+            </div>
+            <Link
+              href={`/brands/${firstBrand.slug}/shop`}
+              className="text-[var(--text-primary)] hover:text-[var(--signal)] transition-colors flex items-center gap-1.5 font-medium"
+            >
+              <span>ENTER ATELIER SHOP</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        )}
+
         <div className="pt-8 flex items-center justify-between font-mono-tag text-xs text-[var(--muted-text)]">
           <span>ONE VENTURE HOUSE. MANY SOVEREIGN BRANDS.</span>
           <Link

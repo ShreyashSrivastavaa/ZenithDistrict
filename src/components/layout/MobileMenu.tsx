@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { LogoMark } from '@/components/brand/LogoMark';
+import { APPAREL_BRAND_NAME, APPAREL_BRAND_SLUG } from '@/data/brands';
 import { X, ArrowRight } from 'lucide-react';
 
 interface MobileMenuProps {
@@ -116,6 +117,44 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </Link>
           );
         })}
+
+        {/* Collapsed Brand Sub-Navigation Section */}
+        <div className="pt-6 pb-2 space-y-3">
+          <div className="flex items-center justify-between font-mono-tag text-[10px] text-[var(--stone)] uppercase tracking-wider">
+            <span>BRAND ATELIER // Z-02</span>
+            <span>{APPAREL_BRAND_NAME}</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-xs font-mono-tag">
+            <Link
+              href={`/brands/${APPAREL_BRAND_SLUG}/shop`}
+              onClick={onClose}
+              className="p-2.5 border border-[var(--border-color)] hover:border-[var(--signal)] bg-[var(--surface-elevated)] text-center transition-colors"
+            >
+              SHOP
+            </Link>
+            <Link
+              href={`/brands/${APPAREL_BRAND_SLUG}/story`}
+              onClick={onClose}
+              className="p-2.5 border border-[var(--border-color)] hover:border-[var(--signal)] bg-[var(--surface-elevated)] text-center transition-colors"
+            >
+              STORY
+            </Link>
+            <Link
+              href={`/brands/${APPAREL_BRAND_SLUG}/size-guide`}
+              onClick={onClose}
+              className="p-2.5 border border-[var(--border-color)] hover:border-[var(--signal)] bg-[var(--surface-elevated)] text-center transition-colors"
+            >
+              SIZE GUIDE
+            </Link>
+            <Link
+              href={`/brands/${APPAREL_BRAND_SLUG}#waitlist`}
+              onClick={onClose}
+              className="p-2.5 border border-[var(--border-color)] hover:border-[var(--signal)] bg-[var(--surface-elevated)] text-center transition-colors text-[var(--signal)] font-medium"
+            >
+              WAITLIST
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Pinned Bottom CTA */}

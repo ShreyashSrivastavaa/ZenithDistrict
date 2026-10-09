@@ -42,7 +42,7 @@ export function CTASection() {
             <MagneticWrapper strength={12}>
               <Link
                 href="/contact"
-                className="px-7 py-3.5 bg-[#F3F1EC] text-[#0A0A0B] hover:bg-[var(--signal)] hover:text-white font-mono-tag text-xs tracking-widest uppercase transition-colors rounded-none flex items-center gap-2 border border-transparent shadow-md"
+                className="px-7 py-3.5 bg-[#F3F1EC] text-[#0A0A0B] hover:bg-[var(--signal)] hover:text-white font-mono-tag text-xs tracking-widest uppercase transition-colors rounded-none flex items-center gap-2 border border-transparent"
               >
                 <span>START A PROJECT</span>
                 <ArrowRight className="w-4 h-4" />

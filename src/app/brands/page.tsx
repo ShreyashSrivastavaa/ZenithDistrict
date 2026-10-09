@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Metadata } from 'next';
 import { Container } from '@/components/layout/Container';
 import { SectionHeader } from '@/components/layout/SectionHeader';
@@ -48,6 +49,36 @@ export default async function BrandsPage() {
             <VentureCard venture={firstBrand} isPlaceholder={true} />
           </div>
         </div>
+
+        {/* Active Collection 01 Spotlight Bar */}
+        {firstBrand && (
+          <div className="mt-8 p-5 border border-[var(--border-color)] bg-[var(--surface-elevated)]/30 flex flex-col md:flex-row md:items-center justify-between gap-4 font-mono-tag text-xs">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-[var(--text-primary)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--signal)]" />
+                <span className="font-medium">COLLECTION 01 — ARCHITECTURAL MONO</span>
+                <span className="text-[var(--stone)] text-[11px]">(4 Silhouettes // Made to Order)</span>
+              </div>
+              <p className="text-[11px] text-[var(--muted-text)] font-sans">
+                Heavyweight cotton blanks, vector technical prints, and localized on-demand production.
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link
+                href={`/brands/${firstBrand.slug}`}
+                className="text-[var(--muted-text)] hover:text-[var(--text-primary)] transition-colors"
+              >
+                Brand Overview →
+              </Link>
+              <Link
+                href={`/brands/${firstBrand.slug}/shop`}
+                className="px-3.5 py-1.5 bg-[var(--text-primary)] text-[var(--bg-page)] hover:bg-[var(--signal)] hover:text-white transition-colors"
+              >
+                Explore Collection
+              </Link>
+            </div>
+          </div>
+        )}
 
         <div className="pt-12 hairline-border-t flex items-center justify-between font-mono-tag text-xs text-[var(--stone)]">
           <span>SUPPLY CHAIN: ON-DEMAND TEXTILES // ZERO SPECULATIVE INVENTORY</span>

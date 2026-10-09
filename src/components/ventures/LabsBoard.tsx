@@ -147,7 +147,7 @@ export function LabsBoard({ experiments }: LabsBoardProps) {
                       <Link
                         key={item.id}
                         href={`/labs/${item.slug}`}
-                        className="group block p-3.5 border border-[var(--border-color)] hover:border-[var(--signal)] bg-[var(--surface)] transition-all shadow-2xs hover:-translate-y-0.5"
+                        className="group block p-3.5 border border-[var(--border-color)] hover:border-[var(--signal)] bg-[var(--surface)] transition-all hover:-translate-y-0.5"
                       >
                         <div className="flex items-center justify-between text-[9px] font-mono-tag text-[var(--stone)] mb-1.5">
                           <span>{item.id}</span>

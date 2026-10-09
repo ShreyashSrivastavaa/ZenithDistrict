@@ -12,12 +12,12 @@ export function BrandStatement() {
   const statementText =
     'ZenithDistrict is where ideas get built, launched and operated. A studio for clients. A house for consumer brands. A home for software products. A lab for everything that doesn’t exist yet.';
 
-  const words = statementText.split(' ');
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 0.8', 'center 0.4'],
   });
+
+  const paragraphOpacity = useTransform(scrollYProgress, [0, 0.6], [0.35, 1]);
 
   const verbs = [
     { verb: 'We build.', division: 'Studio (Z-01)', href: '/studio' },
@@ -45,24 +45,12 @@ export function BrandStatement() {
             {shouldReduceMotion ? (
               <p>{statementText}</p>
             ) : (
-              <p className="flex flex-wrap gap-x-2.5 gap-y-1">
-                {words.map((word, index) => {
-                  const start = index / words.length;
-                  const end = start + 1 / words.length;
-                  // eslint-disable-next-line react-hooks/rules-of-hooks
-                  const opacity = useTransform(scrollYProgress, [start, end], [0.18, 1]);
-
-                  return (
-                    <motion.span
-                      key={index}
-                      style={{ opacity }}
-                      className="inline-block transition-opacity"
-                    >
-                      {word}
-                    </motion.span>
-                  );
-                })}
-              </p>
+              <motion.p
+                style={{ opacity: paragraphOpacity }}
+                className="transition-opacity duration-300"
+              >
+                {statementText}
+              </motion.p>
             )}
           </div>
 

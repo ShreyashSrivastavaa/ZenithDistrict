@@ -71,7 +71,7 @@ export function DistrictMap({
                 onFocus={() => setActiveCode(division.code)}
                 className={`relative p-5 sm:p-6 border transition-all duration-200 cursor-pointer text-left flex flex-col justify-between min-h-[180px] sm:min-h-[220px] rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--signal)] ${
                   isSelected
-                    ? 'border-[var(--signal)] bg-[var(--surface)] shadow-sm -translate-y-0.5'
+                    ? 'border-[var(--signal)] bg-[var(--surface)] -translate-y-0.5'
                     : 'border-[var(--border-color)] hover:border-[var(--stone)] bg-[var(--surface-card)]'
                 }`}
                 aria-pressed={isSelected}

@@ -47,7 +47,7 @@ export function GridOverlay() {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-3 right-3 bg-[var(--surface-elevated)] border border-[var(--border-color)] px-2.5 py-1 text-[10px] font-mono-tag shadow-sm pointer-events-auto flex items-center gap-2">
+      <div className="fixed bottom-3 right-3 bg-[var(--surface-elevated)] border border-[var(--border-color)] px-2.5 py-1 text-[10px] font-mono-tag pointer-events-auto flex items-center gap-2">
         <span className="w-1.5 h-1.5 rounded-full bg-[var(--signal)]"></span>
         <span>ARCHITECTURAL GRID ACTIVE [PRESS &apos;G&apos; TO HIDE]</span>
       </div>

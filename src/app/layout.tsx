@@ -56,7 +56,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <GridOverlay />
-          <Analytics />
+          {process.env.NEXT_PUBLIC_VERCEL_ENV && <Analytics />}
         </ThemeProvider>
       </body>
     </html>
