@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:audit": "node scripts/comprehensive-audit.mjs"
+    "test:audit": "node scripts/comprehensive-audit.mjs",
+    "test:smoke": "node scripts/smoke-test.mjs"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.3.5",
