@@ -12,6 +12,9 @@ export const siteConfig: SiteConfig = {
   contactEmail: 'inquiries@zenithdistrict.com', // TODO: replace with production mailbox
   location: 'Remote & Distributed',
   statusHeadline: 'One district. Many ventures.',
+  shop: {
+    mode: 'preview', // Options: 'preview' | 'waitlist' | 'external' | 'live'
+  },
   flags: {
     showCareers: false, // Hidden until active roles are opened
     showPress: false, // Hidden until formal press kit is released

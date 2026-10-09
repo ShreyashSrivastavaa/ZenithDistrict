@@ -1,10 +1,17 @@
 import { BrandVenture } from './types';
 
+/**
+ * Centralized Apparel Brand Constants
+ * Renaming the brand is a one-line change here. Never hard-code the brand name in components or copy.
+ */
+export const APPAREL_BRAND_NAME = 'Brand One (working title)'; // TODO: replace with finalized apparel brand name
+export const APPAREL_BRAND_SLUG = 'brand-one';
+
 export const brandsData: BrandVenture[] = [
   {
     id: 'brand-01',
-    slug: 'brand-one',
-    name: 'Brand One (Working Title)', // TODO: replace with finalized apparel brand name
+    slug: APPAREL_BRAND_SLUG,
+    name: APPAREL_BRAND_NAME,
     division: 'Z-02',
     divisionSlug: 'brands',
     category: 'Apparel',
@@ -20,21 +27,16 @@ export const brandsData: BrandVenture[] = [
     startedAt: '2026-Q1',
     updatedAt: '2026-Q4',
     theme: {
-      accent: '#E53E3E',
-      badgeBg: 'rgba(229, 62, 62, 0.1)',
+      accent: '#0018a8',
+      badgeBg: 'rgba(0, 24, 168, 0.08)',
     },
     story:
       'Born from our frustration with disposable streetwear graphics and wasteful speculative inventory. We focus on structured heavyweight silhouettes, minimal typographic treatments, and localized on-demand manufacturing that prints only when ordered.',
     dropsPlaceholder: [
       {
-        title: 'Collection 00: District Baseline',
-        status: 'In Prototyping',
-        note: 'Heavyweight 380gsm french terry hoodies and 240gsm structured tees featuring technical coordinate motifs.',
-      },
-      {
         title: 'Collection 01: Architectural Mono',
-        status: 'Planned',
-        note: 'Monochromatic utilitarian outerwear and structured totes.',
+        status: 'Concept / Sampling',
+        note: 'Four silhouettes: Oversized Tee, Boxy Cropped Tee, Long Sleeve, and Sleeveless Top featuring technical coordinate prints.',
       },
     ],
     links: {

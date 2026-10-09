@@ -4,6 +4,7 @@ export const inquiryTypeEnum = z.enum([
   'Studio project',
   'Partnership',
   'Brand collaboration',
+  'Brand waitlist',
   'Other',
 ]);
 
@@ -67,3 +68,20 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
+
+export const brandWaitlistSchema = z.object({
+  email: z
+    .string()
+    .transform((val) => sanitizeString(val).toLowerCase())
+    .pipe(z.string().email({ message: 'A valid email address is required.' }).max(120)),
+  productSlug: z.string().optional(),
+  colorway: z.string().optional(),
+  size: z.string().optional(),
+  website_honeypot: z
+    .string()
+    .max(0, { message: 'Bot verification detected.' })
+    .optional()
+    .or(z.literal('')),
+});
+
+export type BrandWaitlistData = z.infer<typeof brandWaitlistSchema>;

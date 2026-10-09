@@ -138,6 +138,82 @@ export interface Founder {
   };
 }
 
+export type ShopMode = 'preview' | 'waitlist' | 'external' | 'live';
+
+export type GarmentSilhouette =
+  | 'oversized-tee'
+  | 'boxy-cropped-tee'
+  | 'oversized-long-sleeve'
+  | 'oversized-sleeveless';
+
+export type GarmentView =
+  | 'front'
+  | 'back'
+  | 'detail-rib'
+  | 'detail-print'
+  | 'detail-hem';
+
+export interface GarmentColorway {
+  id: string;
+  label: string;
+  hex: string;
+  garmentHex?: string;
+  plateHex?: {
+    light: string;
+    dark: string;
+  };
+}
+
+export type ApparelSize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL';
+
+export interface SizeChartEntry {
+  size: ApparelSize;
+  chestCm: number;
+  lengthCm: number;
+  shoulderCm: number;
+  sleeveCm?: number;
+}
+
+export interface PrintDefinition {
+  type: 'coordinates' | 'blueprint' | 'index' | 'axis';
+  frontPlacement?: string;
+  backPlacement?: string;
+  sleevePlacement?: string;
+}
+
+export type ProductAvailability = 'concept' | 'sampling' | 'preorder' | 'available';
+
+export interface ApparelProduct {
+  slug: string;
+  code: string;
+  name: string;
+  silhouette: GarmentSilhouette;
+  colorways: GarmentColorway[];
+  print: PrintDefinition;
+  sizes: ApparelSize[];
+  disabledSizes?: ApparelSize[];
+  fitNote: string;
+  availability: ProductAvailability;
+  price: number;
+  currency: string;
+  priceConfirmed: boolean;
+  fabric: {
+    gsm?: number;
+    composition: string;
+    weave: string;
+    unconfirmed: boolean;
+  };
+  care: string[];
+  sizeChart: SizeChartEntry[];
+  realImages?: Record<string, Partial<Record<GarmentView, string>>>;
+  sortOrder: number;
+  featured: boolean;
+  description: string;
+  details: string[];
+  productionNote: string;
+  externalCheckoutUrl?: string;
+}
+
 export interface SiteConfig {
   name: string;
   legalName: string;
@@ -149,6 +225,9 @@ export interface SiteConfig {
   contactEmail: string;
   location: string;
   statusHeadline: string;
+  shop: {
+    mode: ShopMode;
+  };
   flags: {
     showCareers: boolean;
     showPress: boolean;

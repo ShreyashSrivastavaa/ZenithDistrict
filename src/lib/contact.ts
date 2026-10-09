@@ -1,4 +1,4 @@
-import { ContactFormData } from './validations';
+import { ContactFormData, BrandWaitlistData } from './validations';
 
 export interface ContactSubmissionResult {
   success: boolean;
@@ -39,10 +39,6 @@ function isSafeWebhookUrl(urlStr: string): boolean {
 
 /**
  * Pluggable contact adapter for ZenithDistrict.
- * In production, connect this to:
- * - Resend API (`resend.emails.send`)
- * - Webhook endpoint (Slack / Discord incoming webhook)
- * - CRM or database ingestion (HubSpot / Notion / PostgreSQL)
  */
 export async function submitContactInquiry(
   data: ContactFormData
@@ -63,27 +59,65 @@ export async function submitContactInquiry(
 
   // Outbound webhook dispatcher with SSRF and timeout guards
   const webhookUrl = process.env.CONTACT_WEBHOOK_URL;
-  if (webhookUrl) {
-    if (!isSafeWebhookUrl(webhookUrl)) {
-      console.error('[ZenithDistrict::ContactAdapter] Insecure or invalid CONTACT_WEBHOOK_URL rejected.');
-    } else {
-      try {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ referenceId, ...data }),
-          signal: AbortSignal.timeout(5000), // 5-second timeout protection
-        });
-      } catch (err) {
-        console.error('[ZenithDistrict::ContactAdapter] Webhook dispatch failed or timed out:', err);
-        // Non-fatal for client response
-      }
+  if (webhookUrl && isSafeWebhookUrl(webhookUrl)) {
+    try {
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ referenceId, ...data }),
+        signal: AbortSignal.timeout(5000),
+      });
+    } catch (err) {
+      console.error('[ZenithDistrict::ContactAdapter] Webhook dispatch failed:', err);
     }
   }
 
   return {
     success: true,
     message: 'Your inquiry has been logged. We review every note directly and respond within 24–48 hours.',
+    referenceId,
+  };
+}
+
+/**
+ * Brand Waitlist submission handler
+ * Records early sampling interest for Collection 01 on-demand pieces.
+ */
+export async function submitBrandWaitlist(
+  data: BrandWaitlistData
+): Promise<ContactSubmissionResult> {
+  const referenceId = `WAIT-${Date.now().toString(36).toUpperCase()}`;
+
+  console.info(`[ZenithDistrict::BrandWaitlist] New entry received:`, {
+    referenceId,
+    email: data.email,
+    productSlug: data.productSlug || 'collection-general',
+    colorway: data.colorway || 'any',
+    size: data.size || 'any',
+    timestamp: new Date().toISOString(),
+  });
+
+  const webhookUrl = process.env.WAITLIST_WEBHOOK_URL || process.env.CONTACT_WEBHOOK_URL;
+  if (webhookUrl && isSafeWebhookUrl(webhookUrl)) {
+    try {
+      await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'brand-waitlist',
+          referenceId,
+          ...data,
+        }),
+        signal: AbortSignal.timeout(5000),
+      });
+    } catch (err) {
+      console.error('[ZenithDistrict::BrandWaitlist] Webhook dispatch failed:', err);
+    }
+  }
+
+  return {
+    success: true,
+    message: 'You have been recorded on the Collection 01 registry. We notify only when physical pieces are ready for sampling.',
     referenceId,
   };
 }
