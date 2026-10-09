@@ -4,8 +4,8 @@ import { BrandVenture } from './types';
  * Centralized Apparel Brand Constants
  * Renaming the brand is a one-line change here. Never hard-code the brand name in components or copy.
  */
-export const APPAREL_BRAND_NAME = 'Brand One (working title)'; // TODO: replace with finalized apparel brand name
-export const APPAREL_BRAND_SLUG = 'brand-one';
+export const APPAREL_BRAND_NAME = 'ZenithDistrict';
+export const APPAREL_BRAND_SLUG = 'zenith-district';
 
 export const brandsData: BrandVenture[] = [
   {
@@ -18,9 +18,9 @@ export const brandsData: BrandVenture[] = [
     status: 'Building',
     tagline: 'Minimalist physical apparel produced on demand.',
     description:
-      'An exploratory apparel label combining architectural typography, heavyweight organic textiles, and zero-inventory on-demand fulfillment.',
+      'The official ZenithDistrict physical apparel label combining architectural typography, heavyweight organic textiles, and zero-inventory on-demand fulfillment.',
     longDescription:
-      'Brand One is ZenithDistrict’s initial experiment in physical commerce. Rather than stocking large upfront production runs, we are testing an on-demand manufacturing pipeline connected directly to high-quality garment blanks and automated fulfillment.',
+      'ZenithDistrict Apparel is our sovereign physical label. Rather than stocking large upfront production runs, we engineer structured heavyweight garments produced strictly to order with zero speculative inventory.',
     featured: true,
     featuredOrder: 1,
     tags: ['Apparel', 'Print-on-Demand', 'Textiles', 'D2C'],

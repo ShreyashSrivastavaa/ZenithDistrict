@@ -14,12 +14,12 @@ async function runSmokeTests() {
   const routes = [
     '/',
     '/brands',
-    '/brands/brand-one',
-    '/brands/brand-one/shop',
-    '/brands/brand-one/shop/oversized-tee-coordinates',
-    '/brands/brand-one/shop/boxy-cropped-tee-blueprint',
-    '/brands/brand-one/story',
-    '/brands/brand-one/size-guide',
+    '/brands/zenith-district',
+    '/brands/zenith-district/shop',
+    '/brands/zenith-district/shop/oversized-tee-coordinates',
+    '/brands/zenith-district/shop/boxy-cropped-tee-blueprint',
+    '/brands/zenith-district/story',
+    '/brands/zenith-district/size-guide',
     '/studio',
     '/products',
     '/labs',
@@ -38,8 +38,14 @@ async function runSmokeTests() {
     }
   }
 
+  // Verify redirect from legacy /brands/brand-one
+  await page.goto(`${BASE_URL}/brands/brand-one`, { waitUntil: 'domcontentloaded' });
+  if (page.url().includes('/brands/zenith-district')) {
+    console.log('[PASS] Redirect /brands/brand-one -> /brands/zenith-district verified');
+  }
+
   // 2. Product Page Interactive Selectors & URL Sync
-  await page.goto(`${BASE_URL}/brands/brand-one/shop/oversized-tee-coordinates`, { waitUntil: 'networkidle' });
+  await page.goto(`${BASE_URL}/brands/zenith-district/shop/oversized-tee-coordinates`, { waitUntil: 'networkidle' });
   const swatch = page.locator('[role="radiogroup"][aria-label*="Colorway"] button').nth(1);
   if (await swatch.count() > 0) {
     await swatch.click();

@@ -12,12 +12,12 @@ const WIDTHS = [320, 390, 768, 1024, 1440, 1920];
 const ROUTES = [
   { path: '/', name: 'home' },
   { path: '/brands', name: 'brands-index' },
-  { path: '/brands/brand-one', name: 'brand-home' },
-  { path: '/brands/brand-one/shop', name: 'brand-shop' },
-  { path: '/brands/brand-one/shop/oversized-tee-coordinates', name: 'pdp-zb01-coordinates' },
-  { path: '/brands/brand-one/shop/boxy-cropped-tee-blueprint', name: 'pdp-zb02-blueprint' },
-  { path: '/brands/brand-one/story', name: 'brand-story' },
-  { path: '/brands/brand-one/size-guide', name: 'brand-size-guide' },
+  { path: '/brands/zenith-district', name: 'brand-home' },
+  { path: '/brands/zenith-district/shop', name: 'brand-shop' },
+  { path: '/brands/zenith-district/shop/oversized-tee-coordinates', name: 'pdp-zb01-coordinates' },
+  { path: '/brands/zenith-district/shop/boxy-cropped-tee-blueprint', name: 'pdp-zb02-blueprint' },
+  { path: '/brands/zenith-district/story', name: 'brand-story' },
+  { path: '/brands/zenith-district/size-guide', name: 'brand-size-guide' },
   { path: '/about', name: 'about' },
 ];
 

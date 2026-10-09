@@ -28,6 +28,20 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  async redirects() {
+    return [
+      {
+        source: '/brands/brand-one',
+        destination: '/brands/zenith-district',
+        permanent: true,
+      },
+      {
+        source: '/brands/brand-one/:path*',
+        destination: '/brands/zenith-district/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

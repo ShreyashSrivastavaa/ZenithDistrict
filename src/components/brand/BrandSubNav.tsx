@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LogoMark } from './LogoMark';
 import { APPAREL_BRAND_NAME, APPAREL_BRAND_SLUG } from '@/data/brands';
 
 interface BrandSubNavProps {
@@ -29,13 +30,17 @@ export function BrandSubNav({ brandSlug = APPAREL_BRAND_SLUG }: BrandSubNavProps
   return (
     <div className="hidden md:block w-full bg-[var(--bg-page)]/95 backdrop-blur-md hairline-border-b sticky top-16 md:top-20 z-40 transition-colors">
       <div className="max-w-[1520px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 h-11 flex items-center justify-between text-xs font-mono-tag">
-        {/* Left: Brand Name / Identifier */}
+        {/* Left: Brand Name / Identifier with Official Logo */}
         <Link
           href={basePath}
-          className="flex items-center gap-2 text-[var(--text-primary)] hover:text-[var(--signal)] transition-colors uppercase tracking-[0.14em] font-medium"
+          className="flex items-center gap-2.5 text-[var(--text-primary)] hover:text-[var(--signal)] transition-colors uppercase tracking-[0.14em] font-medium"
         >
+          <LogoMark size={16} variant="solid" />
           <span className="text-[10px] text-[var(--stone)]">Z-02 //</span>
           <span>{APPAREL_BRAND_NAME}</span>
+          <span className="text-[9px] px-1.5 py-0.5 bg-[var(--surface-elevated)] border border-[var(--border-color)] text-[var(--muted-text)] font-normal tracking-wider">
+            ATELIER
+          </span>
         </Link>
 
         {/* Right: Sub-navigation links */}

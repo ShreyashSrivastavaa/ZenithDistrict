@@ -89,7 +89,7 @@ export function GarmentSilhouettes({
               letterSpacing="0.08em"
               textAnchor="middle"
             >
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         ) : (
@@ -117,7 +117,7 @@ export function GarmentSilhouettes({
               textAnchor="middle"
               opacity="0.9"
             >
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         )}
@@ -190,7 +190,7 @@ export function GarmentSilhouettes({
               letterSpacing="0.08em"
               textAnchor="middle"
             >
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         ) : (
@@ -214,7 +214,7 @@ export function GarmentSilhouettes({
               textAnchor="middle"
               opacity="0.9"
             >
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         )}
@@ -275,7 +275,7 @@ export function GarmentSilhouettes({
             <path d="M 240 150 Q 300 162 360 150" fill="none" stroke={ribColor} strokeWidth="11" strokeLinecap="round" />
             <rect x="272" y="157" width="56" height="12" fill={garmentColor} stroke={seamColor} strokeWidth="0.5" />
             <text x="300" y="165" fontFamily="var(--font-geist-mono), monospace" fontSize="4.2" fill={seamColor} letterSpacing="0.08em" textAnchor="middle">
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         ) : (
@@ -284,7 +284,7 @@ export function GarmentSilhouettes({
             <path d="M 240 150 Q 300 196 360 150" fill="none" stroke={ribColor} strokeWidth="9.5" strokeLinecap="round" />
             <rect x="278" y="156" width="44" height="10" fill={garmentColor} stroke={seamColor} strokeWidth="0.5" opacity="0.8" />
             <text x="300" y="163" fontFamily="var(--font-geist-mono), monospace" fontSize="3.8" fill={seamColor} letterSpacing="0.08em" textAnchor="middle" opacity="0.9">
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         )}
@@ -337,7 +337,7 @@ export function GarmentSilhouettes({
             <path d="M 250 155 Q 300 166 350 155" fill="none" stroke={ribColor} strokeWidth="7" strokeLinecap="round" />
             <rect x="274" y="160" width="52" height="11" fill={garmentColor} stroke={seamColor} strokeWidth="0.5" />
             <text x="300" y="167" fontFamily="var(--font-geist-mono), monospace" fontSize="4.2" fill={seamColor} letterSpacing="0.08em" textAnchor="middle">
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         ) : (
@@ -346,7 +346,7 @@ export function GarmentSilhouettes({
             <path d="M 250 155 Q 300 202 350 155" fill="none" stroke={ribColor} strokeWidth="6.5" strokeLinecap="round" />
             <rect x="278" y="159" width="44" height="10" fill={garmentColor} stroke={seamColor} strokeWidth="0.5" opacity="0.8" />
             <text x="300" y="166" fontFamily="var(--font-geist-mono), monospace" fontSize="3.8" fill={seamColor} letterSpacing="0.08em" textAnchor="middle" opacity="0.9">
-              A ZenithDistrict brand
+              ZENITHDISTRICT
             </text>
           </g>
         )}

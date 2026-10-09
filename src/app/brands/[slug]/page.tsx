@@ -7,6 +7,7 @@ import { getBrands, getBrandBySlug } from '@/lib/content';
 import { getApparelProducts } from '@/data/apparel';
 import { constructMetadata, generateVentureJsonLd, safeJsonLdStringify } from '@/lib/seo';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { LogoMark } from '@/components/brand/LogoMark';
 import { GarmentMock } from '@/components/brand/GarmentMock';
 import { ProductCard } from '@/components/brand/ProductCard';
 import { BrandWaitlistForm } from '@/components/brand/BrandWaitlistForm';
@@ -66,9 +67,19 @@ export default async function BrandTemplatePage({ params }: PageProps) {
         {/* 1. Hero: Big Editorial Title, One Line Copy, Generous Garment Render */}
         <Container>
           <div className="space-y-12">
-            <div className="flex items-center gap-2 font-mono-tag text-xs text-[var(--signal)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--signal)]" />
-              <span>Z-02 // ATELIER EXPERIMENT · EST. 2026</span>
+            <div className="flex items-center gap-3.5">
+              <div className="w-11 h-11 rounded-sm bg-[#0A0A0B] border border-white/10 flex items-center justify-center p-1 shrink-0 text-[#F3F1EC] shadow-none">
+                <LogoMark size={22} variant="solid" />
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2 font-mono-tag text-xs text-[var(--signal)]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--signal)]" />
+                  <span>Z-02 // ZENITHDISTRICT APPAREL · EST. 2026</span>
+                </div>
+                <span className="text-[10px] font-mono-tag text-[var(--stone)] uppercase tracking-wider">
+                  OFFICIAL PHYSICAL LABEL
+                </span>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
