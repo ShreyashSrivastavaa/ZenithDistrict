@@ -27,7 +27,7 @@ export const apparelProducts: ApparelProduct[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
     disabledSizes: [],
     fitNote: 'Wide through the chest with a pronounced dropped shoulder. Sits naturally at the hip.',
-    availability: 'pre-order',
+    availability: 'preorder',
     price: 599, 
     currency: 'INR',
     priceConfirmed: true, 
