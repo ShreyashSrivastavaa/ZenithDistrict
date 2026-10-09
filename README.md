@@ -37,6 +37,118 @@ The status registry in `src/data/status.ts` is the single source of truth. No pr
 
 ---
 
+## Apparel Brand (Z-02 Brands) Architecture & Maintenance
+
+The apparel label operates as a sovereign entity within the district. All brand configuration, catalog data, visual rendering, and commerce mechanics are centralized and strictly typed.
+
+### 1. How to Rename the Brand
+The brand name is centralized in **one single file**.
+Edit `src/data/brands.ts`:
+```typescript
+export const APPAREL_BRAND_NAME = "Your Brand Name";
+```
+Renaming this constant automatically cascades across the entire website: sub-navigation, hero typography, metadata, OpenGraph cards, breadcrumbs, JSON-LD, size guide tables, and footer. Never hardcode the brand name in components or copy.
+
+---
+
+### 2. How to Add a Product, Colorway, or Print
+
+#### Adding a Product:
+Edit `src/data/apparel.ts` and append an entry to `apparelProducts`:
+```typescript
+{
+  slug: 'custom-heavyweight-hoodie',
+  code: 'ZB-05',
+  name: 'Heavyweight Hoodie "Datum"',
+  silhouette: 'oversized-tee', // or any GarmentSilhouette
+  colorways: [
+    { id: 'bone', label: 'Bone', hex: '#F5F2EB', garmentHex: '#F5F2EB' },
+    { id: 'ink', label: 'Ink', hex: '#151618', garmentHex: '#151618' },
+  ],
+  print: {
+    type: 'coordinates', // or 'blueprint' | 'index' | 'axis' | custom
+    frontPlacement: 'Left chest coordinates',
+    backPlacement: 'Plan layout drawing',
+  },
+  sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+  disabledSizes: [],
+  fitNote: 'Boxy, dropped shoulder profile with natural drape.',
+  availability: 'concept', // 'concept' | 'sampling' | 'preorder' | 'available'
+  price: 4800, // TODO: confirm with supplier
+  currency: 'INR',
+  priceConfirmed: false,
+  fabric: {
+    gsm: 400, // TODO: confirm with supplier
+    composition: '100% Organic French Terry', // TODO: confirm with supplier
+    weave: 'Loopback weave', // TODO: confirm with supplier
+    unconfirmed: true,
+  },
+  care: ['Machine wash cold', 'Line dry flat'],
+  sizeChart: [
+    { size: 'M', chestCm: 62, lengthCm: 72, shoulderCm: 56 },
+  ],
+  sortOrder: 5,
+  featured: true,
+  description: 'Detailed description.',
+  details: ['Feature 1', 'Printed to order on demand'],
+  productionNote: 'Produced to order on demand.',
+}
+```
+All static pages (`/brands/brand-one/shop/[product]`), size guide tables, and collections automatically update via Next.js `generateStaticParams`.
+
+#### Adding a Colorway:
+Append a new colorway object to the product's `colorways` array:
+```typescript
+{ id: 'sand', label: 'Sand', hex: '#D6CEBE', garmentHex: '#D6CEBE' }
+```
+The `<GarmentMock />` SVG engine calculates fabric luminance dynamically to render precise contrast seam lines, ribbing, and ink treatments automatically.
+
+#### Adding a Print:
+Vector prints are defined in `src/components/brand/GarmentPrints.tsx`. To add a new graphic treatment:
+1. Define a new SVG vector function in `GarmentPrints.tsx`.
+2. Add the key to `PrintDefinition['type']` in `src/data/types.ts`.
+3. Reference the print key in your product data in `src/data/apparel.ts`.
+
+---
+
+### 3. How to Swap in Real Mockups or Photography
+Every image slot in `<GarmentMock />` supports zero-layout-shift asset overrides.
+When supplier photography or POD mockups are ready, add the URLs or paths to the product definition in `src/data/apparel.ts`:
+```typescript
+imageOverrides: {
+  front: '/images/products/zb01-front-bone.webp',
+  back: '/images/products/zb01-back-bone.webp',
+  detail: '/images/products/zb01-detail-print.webp',
+}
+```
+- `<GarmentMock />` automatically swaps the procedural SVG for high-resolution `next/image` frames within the exact same 4:5 / 3:4 aspect ratio containers.
+- The PDP disclaimer ("Illustrative render. Final product may vary.") automatically hides as soon as `imageOverrides` are present.
+
+---
+
+### 4. How to Change Commerce Mode (`shop.mode`)
+The site supports 4 commerce modes without premature backend dependencies.
+Edit `src/data/site.ts`:
+```typescript
+shop: {
+  mode: 'preview', // 'preview' | 'waitlist' | 'external' | 'live'
+}
+```
+- `'preview'` (Default): Catalog browsing only; displays concept notices, disabled checkout, and optional waitlist modal.
+- `'waitlist'`: Waitlist capture prioritized across all PDP buttons and hero sections.
+- `'external'`: "Order Piece" buttons link directly to external checkout URLs (Shopify, Printful, Printify, Razorpay) specified in `links.externalCheckout` per product/variant.
+- `'live'`: Reserved for native headless cart/checkout integrations.
+
+---
+
+### 5. How to Wire the Waitlist Webhook
+Submissions from the waitlist modal on PDPs and brand pages POST to `/api/waitlist`.
+1. The endpoint validates input against Zod schema (`src/lib/validations.ts`), enforces in-memory rate limiting (max 5 requests/minute), and screens bot honeypots (`website_honeypot`).
+2. Dispatches via `src/lib/contact.ts` -> `submitBrandWaitlist()`.
+3. To forward to Slack, Discord, or Airtable/Klaviyo, set `WAITLIST_WEBHOOK_URL="https://hooks.slack.com/..."` in `.env.local` or wire your CRM dispatch in `src/lib/contact.ts`.
+
+---
+
 ## How to Add New Ventures (Data-Driven Architecture)
 
 The site is entirely data-driven. Adding a new brand, product, or experiment requires adding a single typed object to its respective file in `src/data/`. No page templates need to be modified.
